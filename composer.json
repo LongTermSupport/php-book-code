@@ -1,0 +1,16 @@
+{
+    "name": "book_ops/php-book-code",
+    "description": "Code for PHP Book",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joseph Edmonds",
+            "email": "info@ltscommerce.dev"
+        }
+    ],
+    "minimum-stability": "stable"
+}
