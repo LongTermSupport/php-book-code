@@ -1,16 +1,17 @@
 {
-    "name": "book_ops/php-book-code",
-    "description": "Code for PHP Book",
-    "type": "project",
-    "require": {
-        "phpunit/phpunit": "^9.5"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Joseph Edmonds",
-            "email": "info@ltscommerce.dev"
-        }
-    ],
-    "minimum-stability": "stable"
+  "name": "book_ops/php-book-code",
+  "description": "Code for PHP Book",
+  "type": "project",
+  "require": {
+    "php/php": ">=8.0",
+    "phpunit/phpunit": "^9.5"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Joseph Edmonds",
+      "email": "info@ltscommerce.dev"
+    }
+  ],
+  "minimum-stability": "stable"
 }
