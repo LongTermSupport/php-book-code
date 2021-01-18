@@ -38,7 +38,7 @@ trait PublicRead
     }
 }
 
-# Class CAN be instantiated and inheritied from
+# Class CAN be instantiated and inherited from
 /**
  * @property-read $name
  */
@@ -53,7 +53,7 @@ class Person
     }
 }
 
-# Class CANNOT be instantiated, CAN be inheritied from
+# Class CANNOT be instantiated, CAN be inherited from
 /**
  * @property-read $id
  */
@@ -70,7 +70,7 @@ abstract class AbstractUser extends Person
     abstract public function __toString();
 }
 
-# Class CAN be instantiated, CANNOT be inheritied from
+# Class CAN be instantiated, CANNOT be inherited from
 /**
  * @property-read $id
  * @property-read $name
@@ -97,7 +97,7 @@ final class FrontEndUser extends AbstractUser
     }
 }
 
-# Class CAN be instantiated, CANNOT be inheritied from
+# Class CAN be instantiated, CANNOT be inherited from
 /**
  * @property-read $permName
  * @property-read $can
@@ -132,7 +132,7 @@ final class AdminPermission
     }
 }
 
-# Class CAN be instantiated, CANNOT be inheritied from
+# Class CAN be instantiated, CANNOT be inherited from
 /**
  * @property-read $id
  * @property-read $name
