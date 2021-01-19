@@ -64,9 +64,9 @@ Tree after first recursive pass through and creating temp files:
 passthru(sprintf("tree %s", BASE_DIR));
 
 echo "
-Now we're going to loop over the directory again using regex to pull out blue only
+Now we're going to loop over the directory again using a filter to pull out blue only
 
-Notice the use of an anonymous class
+Notice the use of an anonymous class - https://www.php.net/manual/en/language.oop5.anonymous.php
 ";
 $filterIterator = new class(
     new RecursiveIteratorIterator($directoryIterator)
