@@ -6,6 +6,13 @@
     "php/php": ">=8.0",
     "phpunit/phpunit": "^9.5"
   },
+  "autoload": {
+    "psr-4": {
+      "Book\\": [
+        "src/Part1-Modern-PHP-and-MySQL/Chapter1-Object-Oriented-PHP/"
+      ]
+    }
+  },
   "license": "MIT",
   "authors": [
     {
