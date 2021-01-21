@@ -3,8 +3,9 @@
   "description": "Code for PHP Book",
   "type": "project",
   "require": {
-    "php/php": ">=8.0",
-    "phpunit/phpunit": "^9.5"
+    "php": ">=8.0",
+    "phpunit/phpunit": "^9.5",
+    "edmondscommerce/phpqa": "dev-php8@dev"
   },
   "autoload": {
     "psr-4": {
