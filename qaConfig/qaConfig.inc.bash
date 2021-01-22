@@ -1,0 +1,1 @@
+export useInfection=0

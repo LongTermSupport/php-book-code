@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter1\ExceptionSimple;
 
+use Throwable;
+
 /**
- * This is a special kind of object. It acts just like a function as it implements the magic __invoke method
+ * This is a special kind of object. It acts just like a function as it implements the magic __invoke method.
  */
 final class Dumper
 {
-    public function __invoke(\Throwable $throwable): string
+    public function __invoke(Throwable $throwable): string
     {
         return "
 Caught {$this->getClass($throwable)} with message:
@@ -21,7 +23,7 @@ Stack Trace:
 ";
     }
 
-    private function getClass(\Throwable $throwable): string
+    private function getClass(Throwable $throwable): string
     {
         return $throwable::class;
     }

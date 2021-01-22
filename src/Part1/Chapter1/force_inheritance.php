@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter1;
 
-use Book\Part1\Chapter1\ForceInheritance\FrontEndUser;
-use Book\Part1\Chapter1\ForceInheritance\AdminUser;
 use Book\Part1\Chapter1\ForceInheritance\AdminPermission;
+use Book\Part1\Chapter1\ForceInheritance\AdminUser;
+use Book\Part1\Chapter1\ForceInheritance\FrontEndUser;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
 $frontEndUser = new FrontEndUser(
-    2, 'Steve', 'http://php.com', 'http://something.com'
+    2,
+    'Steve',
+    'http://php.com',
+    'http://something.com'
 );
 echo $frontEndUser;
 

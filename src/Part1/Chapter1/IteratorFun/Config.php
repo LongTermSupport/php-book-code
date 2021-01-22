@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter1\IteratorFun;
 
-class Config
+final class Config
 {
     /** @var string[] */
     private array $subDirs;
@@ -12,8 +12,8 @@ class Config
     public function __construct(private string $baseDir, string ...$subDirs)
     {
         foreach ($subDirs as $subDir) {
-            if (false === str_starts_with(haystack: $subDir, needle: $this->baseDir)) {
-                $subDir = "$this->baseDir/$subDir";
+            if (str_starts_with(haystack: $subDir, needle: $this->baseDir) === false) {
+                $subDir = "{$this->baseDir}/{$subDir}";
             }
             $this->subDirs[] = $subDir;
         }
@@ -31,5 +31,4 @@ class Config
     {
         return $this->baseDir;
     }
-
 }

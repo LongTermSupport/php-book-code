@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Book\Part1\Chapter1\ForceInheritance;
 
 /**
- * Class CANNOT be instantiated, CAN be inherited from
+ * Class CANNOT be instantiated, CAN be inherited from.
  */
 abstract class AbstractUser extends Person
 {
@@ -16,6 +16,6 @@ abstract class AbstractUser extends Person
         parent::__construct($name);
     }
 
-    # Abstract function - must be defined in child classes
+    // Abstract function - must be defined in child classes
     abstract public function __toString();
 }

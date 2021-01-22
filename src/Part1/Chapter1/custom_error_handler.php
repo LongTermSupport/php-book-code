@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter1;
 
-/**
+use ErrorException;
+use stdClass;
+use Throwable;
+
+/*
  * This bit of magic boilerplate will turn any old fashioned PHP error into an ErrorException which you can then catch
  * in your code.
  */
@@ -12,38 +16,38 @@ set_error_handler(static function (int $severity, string $message, string $file,
     if (0 !== (error_reporting() & $severity)) {
         return true;
     }
-    throw new \ErrorException($message, 0, $severity, $file, $line);
+    throw new ErrorException($message, 0, $severity, $file, $line);
 });
 
-/**
+/*
  * This bit of magic boilerplate becomes your ultimate fallback should any exceptions bubble past all the catch blocks
  * in your code.
  */
-set_exception_handler(static function (\Throwable $throwable): void {
-    if (false === $_SERVER['DEBUG_MODE'] ?? false) {
-        echo "
+set_exception_handler(static function (Throwable $throwable): void {
+    if ($_SERVER['DEBUG_MODE'] === false ?? false) {
+        echo '
         An error has occurred, 
         
         please look at a happy picture whilst our engineers fix this for you :)
         
-";
+';
 
         return;
     }
-    echo "
+    echo '
     
 You are clearly a developer, please see a load of useful debug info:
     
-" . var_export($throwable, true);
+' . var_export($throwable, true);
 });
 
-echo "
+echo '
 
 And now to do something silly
 
-";
-/**
+';
+/*
  * This comment is so that the code passes QA, we will learn about that later
  * @phpstan-ignore-next-line
  */
-echo substr(string: new \stdClass(), offset: 'cheese');
+echo substr(string: new stdClass(), offset: 'cheese');

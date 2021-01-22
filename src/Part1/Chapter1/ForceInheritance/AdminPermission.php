@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter1\ForceInheritance;
 
+use InvalidArgumentException;
+
 /**
- * Class CAN be instantiated, CANNOT be inherited from
+ * Class CAN be instantiated, CANNOT be inherited from.
  */
 final class AdminPermission
 {
@@ -23,17 +25,6 @@ final class AdminPermission
         $this->assertValidName();
     }
 
-    private function assertValidName(): void
-    {
-        if (in_array($this->permName, self::PERMS, true)) {
-            return;
-        }
-        throw new \InvalidArgumentException(
-            'Invalid permName ' . $this->permName .
-            ', must be one of ' . print_r(self::PERMS, true)
-        );
-    }
-
     public function getPermName(): string
     {
         return $this->permName;
@@ -42,5 +33,16 @@ final class AdminPermission
     public function isAllowed(): bool
     {
         return $this->allowed;
+    }
+
+    private function assertValidName(): void
+    {
+        if (in_array($this->permName, self::PERMS, true)) {
+            return;
+        }
+        throw new InvalidArgumentException(
+            'Invalid permName ' . $this->permName .
+            ', must be one of ' . print_r(self::PERMS, true)
+        );
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter1\IteratorFun;
 
+use RuntimeException;
 use SplFileInfo;
 
 trait CurrentIsFileInfoTrait
@@ -14,6 +15,6 @@ trait CurrentIsFileInfoTrait
         if ($current instanceof SplFileInfo) {
             return $current;
         }
-        throw new \RuntimeException('unexpected current value ' . var_export($current, true));
+        throw new RuntimeException('unexpected current value ' . var_export($current, true));
     }
 }

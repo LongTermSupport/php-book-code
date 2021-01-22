@@ -9,16 +9,22 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 
-class FilterFiles
+final class FilterFiles
 {
+    /** @return SplFileInfo[] */
+    public function getFilteredFiles(Config $config, string $filterMatch): array
+    {
+        $filterIterator = $this->getIterator($config);
+
+        return iterator_to_array($filterIterator);
+    }
+
     /** @return FilterIterator */
     private function getIterator(Config $config): FilterIterator
     {
         $directoryIterator = new RecursiveDirectoryIterator(directory: $config->getBaseDir());
 
-        return new class(
-            new RecursiveIteratorIterator($directoryIterator)
-        ) extends FilterIterator {
+        return new class(new RecursiveIteratorIterator($directoryIterator)) extends FilterIterator {
             public function accept(): bool
             {
                 $current = $this->current();
@@ -33,16 +39,6 @@ class FilterFiles
             {
                 return str_contains(haystack: $filename, needle: 'blue');
             }
-
-
         };
-    }
-
-    /** @return SplFileInfo[] */
-    public function getFilteredFiles(Config $config, string $filterMatch): array
-    {
-        $filterIterator = $this->getIterator($config);
-
-        return iterator_to_array($filterIterator);
     }
 }

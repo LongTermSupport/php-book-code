@@ -6,26 +6,20 @@ namespace Book\Part1\Chapter1\IteratorFun;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RuntimeException;
 use SplFileInfo;
 
-class FileCreator
+final class FileCreator
 {
     private bool $toggle = false;
     /** @var bool[] */
     private array $visited;
 
-    private function makeDirs(Config $config): void
-    {
-        foreach ($config->getSubDirs() as $subDir) {
-            $this->makeDir($subDir);
-        }
-    }
-
     /**
      * First we create our working directories
      * Then we loop over our iterator and create a file in each nested directory
      * We include some sanity checks to ensure that we don't hit the same directory twice, and that we don't wander
-     * outside the base directory for any reason
+     * outside the base directory for any reason.
      *
      * Our return value is an array of the paths to all the files that we have created
      *
@@ -37,10 +31,10 @@ class FileCreator
         $created = [];
         foreach ($this->getIterator($config) as $fileInfo) {
             /** @var SplFileInfo $fileInfo */
-            if (true === $this->visited($fileInfo)) {
+            if ($this->visited($fileInfo) === true) {
                 continue;
             }
-            if (false === $this->valid($fileInfo, $config)) {
+            if ($this->valid($fileInfo, $config) === false) {
                 continue;
             }
             $created[] = $this->createFile($fileInfo);
@@ -49,9 +43,16 @@ class FileCreator
         return $created;
     }
 
+    private function makeDirs(Config $config): void
+    {
+        foreach ($config->getSubDirs() as $subDir) {
+            $this->makeDir($subDir);
+        }
+    }
+
     /**
      * As we are actively creating files, it can cause us to hit the same path multiple times
-     * This check ensures we only hit a single directory once
+     * This check ensures we only hit a single directory once.
      */
     private function visited(SplFileInfo $fileInfo): bool
     {
@@ -65,17 +66,17 @@ class FileCreator
     }
 
     /**
-     * We check to confirm the file is in the right place and also that it is a directory
+     * We check to confirm the file is in the right place and also that it is a directory.
      */
     private function valid(SplFileInfo $fileInfo, Config $config): bool
     {
         return str_starts_with(haystack: $fileInfo->getPathname(), needle: $config->getBaseDir())
-               && true === $fileInfo->isDir();
+               && $fileInfo->isDir() === true;
     }
 
     /**
      * We create a file in the specifified directory path
-     * with a known prefix of blue/green and then some random characters
+     * with a known prefix of blue/green and then some random characters.
      */
     private function createFile(SplFileInfo $fileInfo): string
     {
@@ -83,8 +84,8 @@ class FileCreator
         $prefix = ($this->toggle = !$this->toggle) ? 'blue_' : 'green_';
 
         $filename = tempnam($path, $prefix);
-        if (false === $filename) {
-            throw new \RuntimeException('Failed creating file at ' . $path);
+        if ($filename === false) {
+            throw new RuntimeException('Failed creating file at ' . $path);
         }
 
         return $filename;
@@ -97,20 +98,22 @@ class FileCreator
     {
         $directoryIterator = new RecursiveDirectoryIterator(directory: $config->getBaseDir());
 
-        /**
+        /*
          * The SELF_FIRST flag means that we list the directory and then the files in there.
          */
-        return new \RecursiveIteratorIterator(
+        return new RecursiveIteratorIterator(
             $directoryIterator,
-            mode: \RecursiveIteratorIterator::SELF_FIRST
+            mode: RecursiveIteratorIterator::SELF_FIRST
         );
     }
 
     private function makeDir(string $path): void
     {
-        if (!mkdir($path, 0777, true) &&
-            !is_dir($path)) {
-            throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
+        if (
+            !mkdir($path, 0777, true)
+            && !is_dir($path)
+        ) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $path));
         }
     }
 }
