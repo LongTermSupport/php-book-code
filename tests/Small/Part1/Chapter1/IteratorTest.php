@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Book\Tests\Large\Part1\Chapter1;
+namespace Book\Tests\Small\Part1\Chapter1;
 
 use Book\Tests\Assets\OutputGetter;
 use PHPUnit\Framework\TestCase;
 
+/** @small */
 class IteratorTest extends TestCase
 {
     private const SCRIPT_PATH     = __DIR__ . '/../../../../src/Part1/Chapter1/iterator.php';
