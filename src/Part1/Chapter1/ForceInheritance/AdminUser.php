@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Book\ForceInheritance;
+namespace Book\Part1\Chapter1\ForceInheritance;
+
+use function PHPUnit\Framework\callback;
 
 /**
  * Class CAN be instantiated, CANNOT be inherited from
- *
- * @property-read $id
- * @property-read $name
- * @property-read $permissions
  */
 final class AdminUser extends AbstractUser
 {
@@ -23,10 +21,10 @@ final class AdminUser extends AbstractUser
     ) {
         parent::__construct($id, $name);
         array_map(
-            function (AdminPermission $perm) {
-                $this->permissions[$perm->permName] = $perm;
-            },
-            $permissions
+            callback: function (AdminPermission $perm): void {
+            $this->permissions[$perm->getPermName()] = $perm;
+        },
+            array: $permissions
         );
     }
 
@@ -35,10 +33,10 @@ final class AdminUser extends AbstractUser
         return "\n\nadmin user $this->name ($this->id) has these permissions: \n" .
                implode("\n",
                        array_map(
-                           static function (AdminPermission $perm) {
-                               return $perm->permName . ': ' . ($perm->can ? 'true' : 'false');
-                           },
-                           $this->permissions
+                           callback: static function (AdminPermission $perm): string {
+                           return $perm->getPermName() . ': ' . ($perm->isAllowed() ? 'true' : 'false');
+                       },
+                           array: $this->permissions
                        )
                ) . "\n";
     }

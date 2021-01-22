@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\ForceInheritance;
+namespace Book\Part1\Chapter1\ForceInheritance;
 
 /**
  * Class CANNOT be instantiated, CAN be inherited from

@@ -5,15 +5,29 @@
   "require": {
     "php": ">=8.0",
     "phpunit/phpunit": "^9.5",
-    "edmondscommerce/phpqa": "dev-php8@dev"
+    "edmondscommerce/phpqa": "dev-php8@dev",
+    "phpmd/phpmd": "dev-master@dev"
   },
   "autoload": {
     "psr-4": {
       "Book\\": [
-        "src/Part1-Modern-PHP-and-MySQL/Chapter1-Object-Oriented-PHP/"
+        "src/"
       ]
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Book\\Tests\\": [
+        "tests/"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@ec_github:/edmondscommerce/phpqa.git"
+    }
+  ],
   "license": "MIT",
   "authors": [
     {
@@ -21,5 +35,8 @@
       "email": "info@ltscommerce.dev"
     }
   ],
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "config": {
+    "bin-dir": "bin"
+  }
 }

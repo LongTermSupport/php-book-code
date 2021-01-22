@@ -2,14 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Book\ForceInheritance;
+namespace Book\Part1\Chapter1\ForceInheritance;
 
 /**
  * Class CAN be instantiated, CANNOT be inherited from
- *
- * @property-read $id
- * @property-read $name
- * @property-read $recentlyViewedPages
  */
 final class FrontEndUser extends AbstractUser
 {

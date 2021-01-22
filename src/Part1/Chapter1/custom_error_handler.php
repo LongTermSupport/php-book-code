@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-const DEBUG_MODE = true;
+namespace Book\Part1\Chapter1;
 
 /**
  * This bit of magic boilerplate will turn any old fashioned PHP error into an ErrorException which you can then catch
  * in your code.
  */
-set_error_handler(static function (int $severity, string $message, string $file, int $line) {
-    if (error_reporting() & $severity) {
-        return;
+set_error_handler(static function (int $severity, string $message, string $file, int $line): bool {
+    if (0 !== (error_reporting() & $severity)) {
+        return true;
     }
-    throw new ErrorException($message, 0, $severity, $file, $line);
+    throw new \ErrorException($message, 0, $severity, $file, $line);
 });
 
 /**
  * This bit of magic boilerplate becomes your ultimate fallback should any exceptions bubble past all the catch blocks
  * in your code.
  */
-set_exception_handler(static function (Throwable $throwable) {
-    if (false === DEBUG_MODE) {
+set_exception_handler(static function (\Throwable $throwable): void {
+    if (false === $_SERVER['DEBUG_MODE'] ?? false) {
         echo "
         An error has occurred, 
         
@@ -42,5 +42,8 @@ echo "
 And now to do something silly
 
 ";
-
-substr(string: new stdClass(), offset: 'cheese');
+/**
+ * This comment is so that the code passes QA, we will learn about that later
+ * @phpstan-ignore-next-line
+ */
+echo substr(string: new \stdClass(), offset: 'cheese');
