@@ -21,8 +21,28 @@ echo $frontEndUser;
 $adminUser = new AdminUser(
     1,
     'Joseph',
-    new AdminPermission(permName: AdminPermission::CAN_VIEW, allowed: true),
-    new AdminPermission(permName: AdminPermission::CAN_EDIT, allowed: true)
+    new class() extends AdminPermission {
+        public function getPermName(): string
+        {
+            return self::CAN_VIEW;
+        }
+
+        public function isAllowed(): bool
+        {
+            return true;
+        }
+    },
+    new class() extends AdminPermission {
+        public function getPermName(): string
+        {
+            return self::CAN_EDIT;
+        }
+
+        public function isAllowed(): bool
+        {
+            return false;
+        }
+    },
 );
 
 echo $adminUser;

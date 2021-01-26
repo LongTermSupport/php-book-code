@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Book\Part1\Chapter1\IteratorFun;
 
 use FilesystemIterator;
-use Hoa\File\SplFileInfo;
 use RuntimeException;
+use SplFileInfo;
 
 /**
  * Unfortunately PHP has no built in equivalent to rm -rf
@@ -20,9 +20,8 @@ final class DirectoryRemover
     public function removeDir(string $path): void
     {
         $traversable = $this->getIterator($path);
-        //$items       = $this->getArray($traversable);
         foreach ($traversable as $item) {
-            if (false === ($item instanceof \SplFileInfo)) {
+            if (false === ($item instanceof SplFileInfo)) {
                 throw new RuntimeException(
                     message: 'Iterator badly configured, 
                     must be set to return SplFileInfo objects with CURRENT_AS_FILEINFO'

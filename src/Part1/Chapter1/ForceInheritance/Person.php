@@ -10,7 +10,13 @@ namespace Book\Part1\Chapter1\ForceInheritance;
 class Person
 {
     public function __construct(
-    protected string $name
+        protected string $name
     ) {
+    }
+
+    /** Method CANNOT be overridden in child classes */
+    final public function getName(): string
+    {
+        return $this->name;
     }
 }

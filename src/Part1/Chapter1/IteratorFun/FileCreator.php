@@ -75,7 +75,7 @@ final class FileCreator
     }
 
     /**
-     * We create a file in the specifified directory path
+     * We create a file in the specified directory path
      * with a known prefix of blue/green and then some random characters.
      */
     private function createFile(SplFileInfo $fileInfo): string

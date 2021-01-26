@@ -19,8 +19,9 @@ $reflection = new ReflectionObject($instance);
 echo '
 You can get information about a class/object, such as the class methods
 ';
-var_dump($reflection->getMethods());
-
+foreach ($reflection->getMethods() as $method) {
+    echo "\n - {$method->name}";
+}
 echo "
 
 And now watch as we do things that you would not normally think is possible,
