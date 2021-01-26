@@ -10,6 +10,8 @@ use Book\Part1\Chapter1\ExceptionSimple\FooException;
 use Exception;
 use Throwable;
 
+require __DIR__ . '/../../../vendor/autoload.php';
+
 $dumper = new Dumper();
 
 try {

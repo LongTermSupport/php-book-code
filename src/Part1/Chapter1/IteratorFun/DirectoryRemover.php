@@ -56,20 +56,4 @@ final class DirectoryRemover
             use CurrentIsFileInfoTrait;
         };
     }
-
-//
-//    /**
-//     * This method flattens the iterator into a simple array of SplFileInfo objects
-//     * and then sorts that array in reverse
-//     *
-//     * @return SplFileInfo[]
-//     */
-//    private function getArray(
-//        FilesystemIterator $traversable
-//    ): array {
-//        $items = iterator_to_array(iterator: $traversable, preserve_keys: false);
-//        $items = array_reverse(array: $items);
-//
-//        return $items;
-//    }
 }

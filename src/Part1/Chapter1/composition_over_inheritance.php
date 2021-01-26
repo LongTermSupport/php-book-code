@@ -12,6 +12,8 @@ use Book\Part1\Chapter1\Composition\User\AdminUser;
 use Book\Part1\Chapter1\Composition\User\FrontEndUser;
 use Book\Part1\Chapter1\Composition\User\UserData;
 
+require __DIR__ . '/../../../vendor/autoload.php';
+
 $frontEndUser = new FrontEndUser(
     new UserData(id: 2, person: new Person(name: 'Steve')),
     new UrlCollection('http://php.com', 'http://something.com')

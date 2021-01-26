@@ -9,6 +9,8 @@ use Book\Part1\Chapter1\IteratorFun\DirectoryRemover;
 use Book\Part1\Chapter1\IteratorFun\FileCreator;
 use Book\Part1\Chapter1\IteratorFun\FilterFiles;
 
+require __DIR__ . '/../../../vendor/autoload.php';
+
 $config = new Config('/tmp/iterator-fun', 'foo/bar/baz', 'doo/dar/daz');
 
 echo '

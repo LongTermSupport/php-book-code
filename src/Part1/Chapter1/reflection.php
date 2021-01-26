@@ -7,6 +7,8 @@ namespace Book\Part1\Chapter1;
 use Book\Part1\Chapter1\ReflectionFun\Kid;
 use ReflectionObject;
 
+require __DIR__ . '/../../../vendor/autoload.php';
+
 echo "
 We're going to take an example object, nothing fancy
 ";

@@ -96,11 +96,15 @@ final class FileCreator
      */
     private function getIterator(Config $config): RecursiveIteratorIterator
     {
-        $directoryIterator = new RecursiveDirectoryIterator(directory: $config->getBaseDir());
+        $directoryIterator = new RecursiveDirectoryIterator(
+            directory: $config->getBaseDir(),
+            flags: RecursiveDirectoryIterator::SKIP_DOTS
+        );
 
         /*
          * The SELF_FIRST flag means that we list the directory and then the files in there.
          */
+
         return new RecursiveIteratorIterator(
             $directoryIterator,
             mode: RecursiveIteratorIterator::SELF_FIRST
