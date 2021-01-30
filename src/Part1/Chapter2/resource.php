@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Book\Part1\Chapter2;
+
 function info(mixed $resource): string
 {
     $var   = var_export($resource, true);
@@ -9,8 +11,8 @@ function info(mixed $resource): string
     $empty = var_export(empty($resource), true);
     $isset = var_export(isset($resource), true);
 
-    return "\nVar: $var" .
-           "\n Type: $type | Empty: $empty | Isset: $isset\n";
+    return "\nVar: {$var}" .
+           "\n Type: {$type} | Empty: {$empty} | Isset: {$isset}\n";
 }
 
 $file = fopen(__FILE__, 'r');

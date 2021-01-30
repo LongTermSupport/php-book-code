@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace Book\Part1\Chapter2;
+
+use stdClass;
+
 $isItScalar = [
     true,
     false,
@@ -13,7 +17,8 @@ $isItScalar = [
     '',
     null,
     fopen(__FILE__, 'r'),
-    function () {},
+    static function (): void {
+    },
     new stdClass(),
 ];
 
@@ -25,5 +30,5 @@ foreach ($isItScalar as $item) {
     $int    = (int)is_int($item);
     $bool   = (int)is_bool($item);
     $float  = (int)is_float($item);
-    echo "\nVar: $var\nType: $type Scalar: $scalar String: $string Int: $int Bool: $bool Float: $float\n";
+    echo "\nVar: {$var}\nType: {$type} Scalar: {$scalar} String: {$string} Int: {$int} Bool: {$bool} Float: {$float}\n";
 }

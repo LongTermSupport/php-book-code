@@ -6,5 +6,4 @@ namespace Book\Part1\Chapter2\TypeInheritance;
 
 interface GrandParentInterfaceTwo
 {
-
 }

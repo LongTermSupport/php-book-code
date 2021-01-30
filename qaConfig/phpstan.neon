@@ -1,4 +1,16 @@
 parameters:
     level: max
     inferPrivatePropertyTypeFromConstructor: true
-
+    ignoreErrors:
+        -
+            message: '#array_values#'
+            path: ./../src/Part1/Chapter2/class_parents.php
+        -
+            message: '#always evaluate to #'
+            path: ./../src/Part1/Chapter2/*
+        -
+            message: '#empty\(\) is not allowed#'
+            path: ./../src/Part1/Chapter2/*
+        -
+            message: '#Only booleans are allowed in a ternary operator#'
+            path: ./../src/Part1/Chapter2/truthy.php

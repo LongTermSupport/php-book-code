@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Book\Part1\Chapter2;
+
 /** @see http://officeipsum.com/ */
 $officeWisdom = "
 How much bandwidth do you have get six alpha pups in here for a focus group no scraps hit the floor, we need this overall
@@ -11,13 +13,11 @@ How much bandwidth do you have get six alpha pups in here for a focus group no s
  are we in agreeance get six alpha pups in here for a focus group.
 ";
 
-# true
+// true
 $stringContains = str_contains(haystack: $officeWisdom, needle: 'active');
 
-# false, because this is case sensitive
+// false, because this is case sensitive
 $stringStartWith = str_starts_with(haystack: $officeWisdom, needle: 'how');
 
-# true
+// true
 $stringEndsWith = str_ends_with(haystack: $officeWisdom, needle: 'focus group.');
-
-
