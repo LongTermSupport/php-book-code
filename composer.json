@@ -4,6 +4,7 @@
   "type": "project",
   "require": {
     "php": ">=8.0",
+    "ext-bcmath": "*",
     "phpunit/phpunit": "^9.5",
     "edmondscommerce/phpqa": "dev-php8@dev",
     "phpmd/phpmd": "dev-master@dev"
@@ -29,14 +30,8 @@
     }
   ],
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Joseph Edmonds",
-      "email": "info@ltscommerce.dev"
-    }
-  ],
-  "minimum-stability": "stable",
   "config": {
     "bin-dir": "bin"
-  }
+  },
+  "minimum-stability": "stable"
 }
