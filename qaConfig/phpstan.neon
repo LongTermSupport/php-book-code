@@ -14,3 +14,16 @@ parameters:
         -
             message: '#Only booleans are allowed in a ternary operator#'
             path: ./../src/Part1/Chapter2/truthy.php
+
+        -
+            message: '#Cannot cast#'
+            path: ./../src/Part1/Chapter2/type_juggling.php
+        -
+            message: '#.*#'
+            path: ./../src/Part1/Chapter2/type_declarations.php
+        -
+            message: '#Binary#'
+            path: ./../src/Part1/Chapter2/string_maths.php
+        -
+            message: '#always true#'
+            path: ./../src/Part1/Chapter2/TypeDeclarations/YeOldeDefensive.php

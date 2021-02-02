@@ -13,7 +13,7 @@ use Throwable;
  * in your code.
  */
 set_error_handler(static function (int $severity, string $message, string $file, int $line): bool {
-    if (0 !== (error_reporting() & $severity)) {
+    if (0 === (error_reporting() & $severity)) {
         return true;
     }
     throw new ErrorException($message, 0, $severity, $file, $line);
@@ -24,7 +24,7 @@ set_error_handler(static function (int $severity, string $message, string $file,
  * in your code.
  */
 set_exception_handler(static function (Throwable $throwable): void {
-    if ($_SERVER['DEBUG_MODE'] === false ?? false) {
+    if (isset($_SERVER['DEBUG_MODE']) === false) {
         echo '
         An error has occurred, 
         
