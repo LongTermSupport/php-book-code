@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Book\Part1\Chapter2\TypeDeclarations;
 
 /**
- * The modern class requires no docblocks for type information,
- * everything it strongly defined in code.
+ * The modern class requires nearly no docblocks for type information,
+ * everything it strongly defined in code apart from the contents of arrays and other iterables.
+ * We still don't have generics so we have to docblock that
+ * but we can at least get some type safety with the splat operator.
  */
 final class ModernClass
 {
@@ -15,10 +17,11 @@ final class ModernClass
 
     public function __construct(
         private object $anObject,
+        // notice union type, PHP 8 feature
         private int | float $aNumber,
         private string $aString,
         private bool $aBool = true,
-        // choosing the type safety of splat over the convenience of constructor promotion
+        // choosing the type safety of splat over the convenience of constructor promotion and named parameters
         int ...$anArray
     ) {
         $this->anArray = $anArray;

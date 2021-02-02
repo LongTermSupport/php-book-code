@@ -47,7 +47,7 @@ echo "\nYeOldeDefensive number is a " . gettype($yeOldeDefensive->getANumber()) 
  */
 echo "\n\nTrying to get an instance of ModernClass with invalid params";
 try {
-    $modern = new ModernClass(anArray: [1, 2, 3], anObject: new stdClass(), aNumber: '1', aString: 123, aBool: 'yes');
+    $modern = new ModernClass(new stdClass(), '1', 123, 'yes', ...[1, 2, 3]);
 } catch (Throwable $throwable) {
     echo "\nAnd failed, got an instance of " . $throwable::class .
          " with an error message:\n {$throwable->getMessage()}";

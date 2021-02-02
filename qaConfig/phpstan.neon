@@ -1,6 +1,8 @@
 parameters:
     level: max
     inferPrivatePropertyTypeFromConstructor: true
+    excludePaths:
+        - ./../src/Part1/Chapter2/CoContra/InvalidClass.php
     ignoreErrors:
         -
             message: '#array_values#'
@@ -14,7 +16,6 @@ parameters:
         -
             message: '#Only booleans are allowed in a ternary operator#'
             path: ./../src/Part1/Chapter2/truthy.php
-
         -
             message: '#Cannot cast#'
             path: ./../src/Part1/Chapter2/type_juggling.php
