@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter1;
 
+require __DIR__ . '/../../../vendor/autoload.php';
+
 use Book\Part1\Chapter1\Attributes\Bar;
 use Book\Part1\Chapter1\Attributes\Baz;
 use Book\Part1\Chapter1\Attributes\Foo;
