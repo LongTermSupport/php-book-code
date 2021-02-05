@@ -28,3 +28,9 @@ parameters:
         -
             message: '#always true#'
             path: ./../src/Part1/Chapter2/TypeDeclarations/YeOldeDefensive.php
+        -
+            message: '#uninitialised has no typehint specified#'
+            path: ./../src/Part1/Chapter2/uninitialised.php
+        -
+            message: '#.*#'
+            path: ./../src/Part1/Chapter2/void.php

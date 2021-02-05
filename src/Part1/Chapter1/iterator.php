@@ -30,8 +30,7 @@ echo "\nCreated File Tree:\n";
 passthru(sprintf('tree %s', $config->getBaseDir()));
 
 /**
- * Now we're going to loop over the directory again using a filter to pull out blue only
- * Notice the use of an anonymous class - https://www.php.net/manual/en/language.oop5.anonymous.php.
+ * Now we're going to loop over the directory again using a filter to pull out blue only.
  */
 $files = (new FilterBlueFiles())->getFilteredFiles($config);
 echo "\nFiltered Blue Files:\n";

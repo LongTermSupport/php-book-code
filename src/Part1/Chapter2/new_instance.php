@@ -19,9 +19,9 @@ echo "\n This is false because \$cloner state is {$cloner->state} but \$cloner2 
 
 echo "\n\nAnd some reflection";
 $clonerReflection = (new ReflectionClass(Cloner::class))->newInstance();
-echo "\n\$cloner == \$clonerReflection? " . var_export($cloner == $clonerReflection, true);
+echo "\n\$cloner == \$clonerReflection? " . var_export($cloner === $clonerReflection, true);
 $clonerReflNoConstruct = (new ReflectionClass(Cloner::class))->newInstanceWithoutConstructor();
-echo "\n\$cloner == \$clonerReflNoConstruct? " . var_export($cloner == $clonerReflNoConstruct, true);
+echo "\n\$cloner == \$clonerReflNoConstruct? " . var_export($cloner === $clonerReflNoConstruct, true);
 echo "\n This is false because \$cloner state is {$cloner->state} but \$clonerReflNoConstruct state is {$clonerReflNoConstruct->state}  ";
 
 echo "\n\nAnd some serializing/unserializing";
@@ -31,4 +31,4 @@ echo "\nSleeper Asleep:\n{$sleeperAsleep}";
 
 echo "\nNow unserializing with allowed classes:";
 $sleeper2 = unserialize($sleeperAsleep, ['allowed_classes' => [Sleeper::class]]);
-echo "\n\$sleeper == \$sleeper2? " . var_export($sleeper == $sleeper2, true);
+echo "\n\$sleeper == \$sleeper2? " . var_export($sleeper === $sleeper2, true);

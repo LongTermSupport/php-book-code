@@ -18,7 +18,7 @@ final class ValidClass extends ParentClass implements ScalarInterface
 
     /**
      * Contravariant with Interface, types expanded to accept ints
-     * Covariant with ParentClass, return type has been tightened and int has been removed as an allowed type.
+     * Covariant with Interface, return type has been tightened and int has been removed as an allowed type.
      */
     public function doSomething(string | int $foo): string
     {

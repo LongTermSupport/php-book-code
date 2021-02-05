@@ -104,7 +104,6 @@ final class FileCreator
         /*
          * The SELF_FIRST flag means that we list the directory and then the files in there.
          */
-
         return new RecursiveIteratorIterator(
             $directoryIterator,
             mode: RecursiveIteratorIterator::SELF_FIRST
