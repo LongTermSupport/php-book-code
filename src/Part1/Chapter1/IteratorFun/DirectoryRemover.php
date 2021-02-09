@@ -19,6 +19,9 @@ final class DirectoryRemover
 {
     public function removeDir(string $path): void
     {
+        if (!is_dir($path)) {
+            return;
+        }
         $traversable = $this->getIterator($path);
         foreach ($traversable as $item) {
             if (false === ($item instanceof SplFileInfo)) {
@@ -51,7 +54,8 @@ final class DirectoryRemover
          * will always return the SplFileInfo
          * and for brevity this is using an anonymous class and a trait
          */
-        return new class(directory: $path, flags: FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS) extends FilesystemIterator {
+        return new class(directory: $path, flags: FilesystemIterator::CURRENT_AS_FILEINFO |
+                                                  FilesystemIterator::SKIP_DOTS) extends FilesystemIterator {
             use CurrentIsFileInfoTrait;
         };
     }
