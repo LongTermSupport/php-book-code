@@ -23,12 +23,6 @@
       ]
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@ec_github:/edmondscommerce/phpqa.git"
-    }
-  ],
   "license": "MIT",
   "config": {
     "bin-dir": "bin"
