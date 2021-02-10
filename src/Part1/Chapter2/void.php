@@ -9,7 +9,7 @@ function yo(?string $yo): void
     if ($yo === null) {
         echo 'yo';
 
-        // in a void function, we use an empty return to break out of teh function if we are done
+        // in a void function, we use an empty return to break out of the function if we are done
         return;
     }
     echo $yo;
@@ -17,7 +17,7 @@ function yo(?string $yo): void
 
 $void = yo('hey!');
 
-$noReturn = (static function (): void {
+$noReturn = (static function () {
 })();
 
 echo "\n\$void=" . var_export($void, true);

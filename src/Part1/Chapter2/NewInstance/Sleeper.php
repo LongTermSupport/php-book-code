@@ -33,7 +33,7 @@ final class Sleeper
     }
 
     /**
-     * Handle setting the data of our new instance by unpacking the serialised data array and assiging it as required.
+     * Handle setting the data of our new instance by unpacking the serialised data array and assigning it as required.
      * Any resources can be reestablished as required.
      *
      * @param array<int, mixed> $data

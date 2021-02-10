@@ -8,7 +8,7 @@ namespace Book\Part1\Chapter2;
 $officeWisdom = "
 How much bandwidth do you have get six alpha pups in here for a focus group no scraps hit the floor, we need this overall
  to be busier and more active. Deploy to production we are running out of runway yet cross functional teams enable out 
- of the box brainstorming we've got to manage that low hanging fruit and curate, but synergestic actionables. 
+ of the box brainstorming we've got to manage that low hanging fruit and curate, but synergistic actionable. 
  Ladder up / ladder back to the strategy have bandwidth. Best practices post launch for globalize crisp ppt obviously 
  are we in agreeance get six alpha pups in here for a focus group.
 ";

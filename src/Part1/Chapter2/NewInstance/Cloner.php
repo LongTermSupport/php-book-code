@@ -19,7 +19,7 @@ final class Cloner
         echo "\nI am multiplying: hey me, meet me";
     }
 
-    /** The actual ID for the unique object isntance */
+    /** The actual ID for the unique object instance */
     public function getObjectId(): int
     {
         return spl_object_id($this);

@@ -12,8 +12,8 @@ echo "\nYou can access untyped properties and the value is: " .
      var_export($untyped->uninitialised, true);
 
 $typed = new class() {
-    public string $unintialised;
+    public string $uninitialised;
 };
 
 echo "\nHowever, try this with typed properties..\n and it goes:\n\n";
-echo $typed->unintialised;
+echo $typed->uninitialised;
