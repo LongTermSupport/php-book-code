@@ -39,6 +39,11 @@ class Database
         return $this->validTable($table)->storage[$table][$uuidString] ?? null;
     }
 
+    public function loadAll(string $table): array
+    {
+        return $this->validTable($table)->storage[$table];
+    }
+
     public function save(string $table, array $data): Uuid
     {
         $uuid       = $data[Uuid::DATA_KEY] ?? Uuid::create();
