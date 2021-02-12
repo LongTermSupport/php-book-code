@@ -10,7 +10,7 @@ $object = new class {
 
     public function __construct()
     {
-        $this->property = new class() {
+        $this->property1 = new class() {
             public string $thing = 'blah';
         };
     }
