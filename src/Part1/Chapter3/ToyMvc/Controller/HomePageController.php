@@ -18,9 +18,12 @@ class HomePageController implements ControllerInterface
 REGEXP;
 
     public function __construct()
+    {
+
+    }
 
     public function getResponse(RequestData $requestData): Response
     {
-        $data=new HomePageData()
+        $data=new HomePageData();
     }
 }
