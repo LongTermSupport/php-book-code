@@ -8,6 +8,7 @@ use Book\Part1\Chapter1\IteratorFun\Config;
 use Book\Part1\Chapter1\IteratorFun\DirectoryRemover;
 use Book\Part1\Chapter1\IteratorFun\FileCreator;
 use Book\Part1\Chapter1\IteratorFun\FilterBlueFiles;
+use Book\Part1\Chapter1\IteratorFun\Tree;
 use RuntimeException;
 
 require __DIR__ . '/../../../vendor/autoload.php';
@@ -33,7 +34,7 @@ $config = new Config(TMP_DIR . '/iterator-fun', 'foo/bar/baz', 'doo/dar/daz');
  * (Could have used an iterator for this as well, but I need to keep the word count down a bit!)
  */
 echo "\nCreated File Tree:\n";
-passthru(sprintf('tree %s', $config->getBaseDir()));
+echo (new Tree())->getAsciiTree($config->getBaseDir());
 
 /**
  * Now we're going to loop over the directory again using a filter to pull out blue only.
