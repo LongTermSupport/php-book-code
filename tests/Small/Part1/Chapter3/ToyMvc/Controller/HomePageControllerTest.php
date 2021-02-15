@@ -23,9 +23,9 @@ final class HomePageControllerTest extends TestCase
         $response = HomePageController::create([])
             ->getResponse(
                 new RequestData(
-                                              '/',
-                                              new RequestMethod(RequestMethod::METHOD_GET)
-                                          )
+                    '/',
+                    new RequestMethod(RequestMethod::METHOD_GET)
+                )
             )
         ;
         ob_start();
