@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter3\ToyMvc\View;
 
-class Esc
+final class Esc
 {
     public static function _(string $input): string
     {

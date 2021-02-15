@@ -8,8 +8,13 @@ use Book\Part1\Chapter3\ToyMvc\Model\Entity\CategoryEntity;
 use Book\Part1\Chapter3\ToyMvc\Model\Repository\CategoryRepository;
 use PHPUnit\Framework\TestCase;
 
-/** @small */
-class CategoryRepositoryTest extends TestCase
+/**
+ * @small
+ *
+ * @internal
+ * @coversNothing
+ */
+final class CategoryRepositoryTest extends TestCase
 {
     private CategoryRepository $repo;
 

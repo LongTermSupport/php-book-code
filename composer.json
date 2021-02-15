@@ -5,6 +5,9 @@
   "require": {
     "php": ">=8.0",
     "ext-bcmath": "*",
+    "ext-tidy": "*"
+  },
+  "require-dev": {
     "phpunit/phpunit": "^9.5",
     "edmondscommerce/phpqa": "dev-php8@dev",
     "phpmd/phpmd": "dev-master@dev"

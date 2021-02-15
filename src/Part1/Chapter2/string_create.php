@@ -15,10 +15,10 @@ $singleQuoted = 'This is a single quoted string. It can contain all kind of char
 echo "\n{$singleQuoted}\n";
 
 $nowDoc = <<<'DELIM'
-This is a a NOWDOC string. The definition looks more verbose than single quoted, and you have to type a few more characters. 
-What you get in return though is that you can include all ''' you want with no escaping.
-You can include all the $'%"\n special characters you want and they will just be included in the string as is
-DELIM;
+    This is a a NOWDOC string. The definition looks more verbose than single quoted, and you have to type a few more characters. 
+    What you get in return though is that you can include all ''' you want with no escaping.
+    You can include all the $'%"\n special characters you want and they will just be included in the string as is
+    DELIM;
 echo "\n{$nowDoc}\n";
 
 /**
@@ -41,8 +41,8 @@ As with single quoted strings, you have to escape any \" characters you want to 
 echo "\n{$doubleQuoted}\n";
 
 $hereDoc = <<<DELIM
-A heredoc is exactly like the double quoted string, but comes with the benefit of " and ' being included with no hassle. 
-You can also embed things like {$thingToEmbed} and {$otherThing->getStuff()}.
-HEREDOC strings will also let you \n embed\n\t special\n\t\t characters.
-DELIM;
+    A heredoc is exactly like the double quoted string, but comes with the benefit of " and ' being included with no hassle. 
+    You can also embed things like {$thingToEmbed} and {$otherThing->getStuff()}.
+    HEREDOC strings will also let you \n embed\n\t special\n\t\t characters.
+    DELIM;
 echo "\n{$hereDoc}\n";

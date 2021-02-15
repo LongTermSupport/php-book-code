@@ -8,21 +8,23 @@ use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\Response;
 use Book\Part1\Chapter3\ToyMvc\Meta\Route;
+use Book\Part1\Chapter3\ToyMvc\Model\Entity\CategoryEntity;
+use Book\Part1\Chapter3\ToyMvc\Model\Entity\Uuid;
 use Book\Part1\Chapter3\ToyMvc\Model\Repository\CategoryRepository;
-use Book\Part1\Chapter3\ToyMvc\View\Data\HomePageData;
+use Book\Part1\Chapter3\ToyMvc\View\Data\CategoryPageData;
 use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
 
-#[Route(HomePageController::ROUTE_REGEX, RequestMethod::METHOD_GET)]
-final class HomePageController implements ControllerInterface
+#[Route(CategoryPageController::ROUTE_REGEX, RequestMethod::METHOD_GET)]
+final class CategoryPageController implements ControllerInterface
 {
     public const ROUTE_REGEX = <<<'REGEXP'
-        %^/$%m
+        %^/c/(?<id>.+?)$%m
         REGEXP;
 
-    public const TEMPLATE_NAME = 'HomePageTemplate.php';
+    public const TEMPLATE_NAME = 'CategoryPageTemplate.php';
 
     public function __construct(
-        private CategoryRepository $categoryRepository,
+        private CategoryEntity $categoryEntity,
         private TemplateRenderer $templateRenderer
     ) {
     }
@@ -30,16 +32,17 @@ final class HomePageController implements ControllerInterface
     /** @param array<mixed,string> $uriMatches */
     public static function create(array $uriMatches): static
     {
+        $categoryId = new Uuid($uriMatches['id']);
+
         return new self(
-            new CategoryRepository(),
+            (new CategoryRepository())->load($categoryId),
             new TemplateRenderer()
         );
     }
 
     public function getResponse(RequestData $requestData): Response
     {
-        $collection  = $this->categoryRepository->loadAll();
-        $data        = new HomePageData($collection);
+        $data        = new CategoryPageData($this->categoryEntity);
         $pageContent = $this->templateRenderer->renderTemplate(self::TEMPLATE_NAME, $data);
 
         return new Response($pageContent);

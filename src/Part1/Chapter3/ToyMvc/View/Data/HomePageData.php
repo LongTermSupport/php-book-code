@@ -11,7 +11,6 @@ final class HomePageData implements TemplateDataInterface
     public function __construct(
         private CategoryCollection $categoryCollection
     ) {
-
     }
 
     public function getCategoryCollection(): CategoryCollection

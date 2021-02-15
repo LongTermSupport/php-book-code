@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Book\Tests\Small\Part1\Chapter3\ToyMvc\Model\Collection;
 
-use Book\Part1\Chapter3\ToyMvc\Model\Collection\CategoryCollection;
-use Book\Part1\Chapter3\ToyMvc\Model\Entity\CategoryEntity;
-use Book\Part1\Chapter3\ToyMvc\Model\Repository\CategoryRepository;
+use Book\Part1\Chapter3\ToyMvc\Model\Collection\PostCollection;
+use Book\Part1\Chapter3\ToyMvc\Model\Entity\PostEntity;
+use Book\Part1\Chapter3\ToyMvc\Model\Repository\PostRepository;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,15 +15,15 @@ use PHPUnit\Framework\TestCase;
  * @internal
  * @coversNothing
  */
-final class CategoryCollectionTest extends TestCase
+final class PostCollectionTest extends TestCase
 {
-    private const EXPECTED_COUNT = 2;
-    private CategoryCollection $collection;
+    private const EXPECTED_COUNT = 4;
+    private PostCollection $collection;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->collection = (new CategoryRepository())->loadAll();
+        $this->collection = (new PostRepository())->loadAll();
     }
 
     /** @test */
@@ -31,7 +31,7 @@ final class CategoryCollectionTest extends TestCase
     {
         $n = 0;
         foreach ($this->collection as $item) {
-            self::assertInstanceOf(CategoryEntity::class, $item);
+            self::assertInstanceOf(PostEntity::class, $item);
             ++$n;
         }
         self::assertSame(self::EXPECTED_COUNT, $n);
@@ -42,12 +42,12 @@ final class CategoryCollectionTest extends TestCase
     {
         $n = 0;
         foreach ($this->collection as $item) {
-            self::assertInstanceOf(CategoryEntity::class, $item);
+            self::assertInstanceOf(PostEntity::class, $item);
             ++$n;
         }
         $this->collection->rewind();
         foreach ($this->collection as $item) {
-            self::assertInstanceOf(CategoryEntity::class, $item);
+            self::assertInstanceOf(PostEntity::class, $item);
             ++$n;
         }
         self::assertSame(self::EXPECTED_COUNT * 2, $n);

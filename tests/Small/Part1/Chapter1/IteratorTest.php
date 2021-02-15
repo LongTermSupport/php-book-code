@@ -17,8 +17,8 @@ final class IteratorTest extends TestCase
 {
     private const SCRIPT_PATH     = __DIR__ . '/../../../../src/Part1/Chapter1/iterator.php';
     private const EXPECTED_OUTPUT = <<<'TEXT'
-6 directories, 6 files
-TEXT;
+        6 directories, 6 files
+        TEXT;
 
     /** @test */
     public function outputIsAsExpected(): void

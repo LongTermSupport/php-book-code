@@ -11,7 +11,6 @@ final class PostEntity implements EntityInterface
         private string $title,
         private string $contentHtml
     ) {
-
     }
 
     public function getTitle(): string
@@ -28,6 +27,4 @@ final class PostEntity implements EntityInterface
     {
         return $this->uuid;
     }
-
-
 }

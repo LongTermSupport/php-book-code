@@ -4,6 +4,7 @@ parameters:
     excludePaths:
         - ./../src/Part1/Chapter2/CoContra/InvalidClass.php
     ignoreErrors:
+        # Chapter 2
         -
             message: '#array_values#'
             path: ./../src/Part1/Chapter2/class_parents.php
@@ -34,3 +35,19 @@ parameters:
         -
             message: '#.*#'
             path: ./../src/Part1/Chapter2/void.php
+        # Chapter 3
+        -
+            message: '#Cannot cast tidy to string#'
+            path: ./../src/Part1/Chapter3/ToyMvc/View/TemplateRenderer.php
+
+        -
+            message: '#Unexpected token "\$data"#'
+            path: ./../src/Part1/Chapter3/ToyMvc/View/Template/*
+
+        -
+            message: '#Variable \$data might not be defined#'
+            path: ./../src/Part1/Chapter3/ToyMvc/View/Template/*
+
+        -
+            message: '#should return static#'
+            path: ./../src/Part1/Chapter3/ToyMvc/Controller/*

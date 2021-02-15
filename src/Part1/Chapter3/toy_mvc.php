@@ -10,14 +10,35 @@ use Book\Part1\Chapter3\ToyMvc\FrontController;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
-$_SERVER['REQUEST_URI']    = '/';
-$_SERVER['REQUEST_METHOD'] = 'GET';
+/**
+ * This little function lets us simulate a browser request to our MVC app.
+ */
+function visit(string $uri): string
+{
+    $_SERVER['REQUEST_URI']    = $uri;
+    $_SERVER['REQUEST_METHOD'] = 'GET';
 
-$requestData     = new RequestData(
-    $_SERVER['REQUEST_URI'],
-    new RequestMethod($_SERVER['REQUEST_METHOD'])
-);
-$frontController = new FrontController();
-$frontController->getController($requestData)
-                ->getResponse($requestData)
-                ->send();
+    $requestData     = new RequestData(
+        $_SERVER['REQUEST_URI'],
+        new RequestMethod($_SERVER['REQUEST_METHOD'])
+    );
+    $frontController = new FrontController();
+    ob_start();
+    $frontController->getController($requestData)
+        ->getResponse($requestData)
+        ->send()
+    ;
+
+    return (string)ob_get_clean();
+}
+
+$homePage = visit('/');
+
+echo $homePage;
+
+preg_match_all('%href="(?<uri>[^"]+)"%', $homePage, $matches);
+
+foreach ($matches['uri'] as $uri) {
+    echo "\n\n Now Visiting '{$uri}' \n\n";
+    echo visit($uri);
+}

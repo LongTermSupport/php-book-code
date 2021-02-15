@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter3\ToyMvc\Controller\Data;
 
-class Response
+final class Response
 {
     /** @var ResponseHeader[] */
     private array $headers;
@@ -16,7 +16,7 @@ class Response
 
     public function send(): void
     {
-        array_map(static fn(ResponseHeader $header) => $header->send(), $this->headers);
+        array_map(static fn (ResponseHeader $header) => $header->send(), $this->headers);
         echo $this->responseBody;
     }
 }

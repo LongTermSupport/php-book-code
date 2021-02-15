@@ -2,31 +2,19 @@
 
 declare(strict_types=1);
 
-$object = new class {
-    private ?object $property1;
-    private ?object $property2 = null;
-    public bool     $bool1     = true;
-    public bool     $bool2     = false;
+namespace Book\Part1\Chapter2;
 
-    public function __construct()
-    {
-        $this->property1 = new class() {
-            public string $thing = 'blah';
-        };
-    }
+use Book\Part1\Chapter2\ShortHand\Container;
+use Book\Part1\Chapter2\ShortHand\SmallClass;
 
-    public function getProperty1(): ?object
-    {
-        return $this->property1;
-    }
+require __DIR__ . '/../../../vendor/autoload.php';
 
-    public function getProperty2(): ?object
-    {
-        return $this->property2;
-    }
-};
+$object = new Container(
+    new SmallClass('foo val'),
+    null
+);
 
-/**
+/*
  * First lets compare some classic if/else code with a ternary operator
  */
 // Classic if/else code checking
@@ -43,29 +31,26 @@ $value2 = $object->bool1 === true ? 'bool 1 is true' : 'bool 1 is false';
 
 echo "\n" . '$value1===$value2? ' . var_export($value1 === $value2, true);
 
-
 // classic null checking monstrosity (deliberately verbose)
-if ($object->getProperty2() === null) {
-    if ($object->getProperty1() === null) {
+if ($object->property2 === null) {
+    if ($object->property1 === null) {
         $value3 = null;
     } else {
-        if ($object->getProperty1()->thing === null) {
+        if ($object->property1->foo === null) {
             $value3 = null;
         } else {
-            $value3 = $object->getProperty1()->thing;
+            $value3 = $object->property1->foo;
         }
     }
 } else {
-    if ($object->getProperty2() === null) {
-        $value3 = null;
-    } elseif ($object->getProperty2()->foo === null) {
+    if ($object->property2->foo === null) {
         $value3 = null;
     } else {
-        $value3 = $object->getProperty2()->foo;
+        $value3 = $object->property2->foo;
     }
 }
 
 // null coalesce & nullsafe operator
-$value4 = $object?->getProperty2()?->foo ?? $object?->getProperty1()?->thing;
+$value4 = $object->property2?->foo ?? $object->property1?->foo;
 
 echo "\n" . '$value3===$value4? ' . var_export($value3 === $value4, true);

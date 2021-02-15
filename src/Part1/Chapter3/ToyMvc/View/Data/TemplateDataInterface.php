@@ -6,5 +6,4 @@ namespace Book\Part1\Chapter3\ToyMvc\View\Data;
 
 interface TemplateDataInterface
 {
-
 }

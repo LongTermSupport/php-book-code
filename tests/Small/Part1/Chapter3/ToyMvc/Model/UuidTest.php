@@ -7,18 +7,32 @@ namespace Book\Tests\Small\Part1\Chapter3\ToyMvc\Model;
 use Book\Part1\Chapter3\ToyMvc\Model\Entity\Uuid;
 use PHPUnit\Framework\TestCase;
 
-class UuidTest extends TestCase
+/**
+ * @small
+ *
+ * @internal
+ * @coversNothing
+ */
+final class UuidTest extends TestCase
 {
     private const TEST_ITERATION_CNT = 100;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function itGeneratesAndValidatesUuids(): void
     {
-        for ($x = 0; $x <= self::TEST_ITERATION_CNT; $x++) {
+        for ($x = 0; $x <= self::TEST_ITERATION_CNT; ++$x) {
             $uuid = Uuid::create();
             self::assertNotEmpty((string)$uuid);
         }
+    }
+
+    /** @test */
+    public function itMatches(): void
+    {
+        $uuid1 = Uuid::create();
+        $uuid2 = new Uuid((string)$uuid1);
+        self::assertTrue($uuid1->matches($uuid2));
+        $uuid3 = Uuid::create();
+        self::assertFalse($uuid1->matches($uuid3));
     }
 }
