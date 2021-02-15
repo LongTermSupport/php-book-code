@@ -39,15 +39,9 @@ parameters:
         -
             message: '#Cannot cast tidy to string#'
             path: ./../src/Part1/Chapter3/ToyMvc/View/TemplateRenderer.php
-
-        -
-            message: '#Unexpected token "\$data"#'
-            path: ./../src/Part1/Chapter3/ToyMvc/View/Template/*
-
         -
             message: '#Variable \$data might not be defined#'
             path: ./../src/Part1/Chapter3/ToyMvc/View/Template/*
-
         -
             message: '#should return static#'
             path: ./../src/Part1/Chapter3/ToyMvc/Controller/*
