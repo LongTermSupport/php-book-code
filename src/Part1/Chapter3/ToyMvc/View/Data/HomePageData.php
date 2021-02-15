@@ -6,7 +6,7 @@ namespace Book\Part1\Chapter3\ToyMvc\View\Data;
 
 use Book\Part1\Chapter3\ToyMvc\Model\Collection\CategoryCollection;
 
-final class HomePageData
+final class HomePageData implements TemplateDataInterface
 {
     public function __construct(
         private CategoryCollection $categoryCollection
@@ -18,5 +18,4 @@ final class HomePageData
     {
         return $this->categoryCollection;
     }
-
 }

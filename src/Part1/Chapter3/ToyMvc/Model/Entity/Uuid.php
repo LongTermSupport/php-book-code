@@ -17,7 +17,9 @@ final class Uuid implements Stringable
 
     public function __construct(private string $uuid)
     {
-
+        if (false === $this->isValid($this->uuid)) {
+            throw new \InvalidArgumentException('Invalid UUID ' . $this->uuid);
+        }
     }
 
     public static function create(): self
@@ -35,6 +37,11 @@ final class Uuid implements Stringable
         );
 
         return new self($uuidString);
+    }
+
+    private function isValid(string $uuid): bool
+    {
+        return (bool)preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di', $uuid);
     }
 
     public function __toString(): string

@@ -18,10 +18,13 @@ final class FrontController
 
     private function getRoute(string $controllerFqn): Route
     {
-        return (new \ReflectionClass($controllerFqn))->getAttributes(Route::class)[0]?->newInstance()
-               ?? throw new \InvalidArgumentException(
-                'Controller ' . $controllerFqn . ' does not have a Route attribute'
-            );
+        $route = (new \ReflectionClass($controllerFqn))->getAttributes(Route::class)[0]?->newInstance();
+        if ($route instanceof Route) {
+            return $route;
+        }
+        throw new \InvalidArgumentException(
+            'Controller ' . $controllerFqn . ' does not have a Route attribute'
+        );
     }
 
     public function getController(RequestData $requestData): ControllerInterface

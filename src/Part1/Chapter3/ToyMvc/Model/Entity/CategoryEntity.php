@@ -6,9 +6,10 @@ namespace Book\Part1\Chapter3\ToyMvc\Model\Entity;
 
 use Book\Part1\Chapter3\ToyMvc\Model\Collection\PostCollection;
 
-class CategoryEntity
+class CategoryEntity implements EntityInterface
 {
     public function __construct(
+        private Uuid $uuid,
         private string $name,
         private PostCollection $postCollection
     ) {
@@ -25,4 +26,8 @@ class CategoryEntity
         return $this->postCollection;
     }
 
+    public function getUuid(): Uuid
+    {
+        return $this->uuid;
+    }
 }

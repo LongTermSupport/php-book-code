@@ -8,7 +8,9 @@ use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\Response;
 use Book\Part1\Chapter3\ToyMvc\Meta\Route;
+use Book\Part1\Chapter3\ToyMvc\Model\Repository\CategoryRepository;
 use Book\Part1\Chapter3\ToyMvc\View\Data\HomePageData;
+use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
 
 #[Route(HomePageController::ROUTE_REGEX, RequestMethod::METHOD_GET)]
 class HomePageController implements ControllerInterface
@@ -17,13 +19,21 @@ class HomePageController implements ControllerInterface
 %^/$%m
 REGEXP;
 
-    public function __construct()
-    {
+    public const TEMPLATE_NAME = 'HomePageTemplate.php';
+
+    public function __construct(
+        private CategoryRepository $categoryRepository,
+        private TemplateRenderer $templateRenderrer
+    ) {
 
     }
 
     public function getResponse(RequestData $requestData): Response
     {
-        $data=new HomePageData();
+        $collection  = $this->categoryRepository->loadAll();
+        $data        = new HomePageData($collection);
+        $pageContent = $this->templateRenderrer->renderTemplate(self::TEMPLATE_NAME, $data);
+
+        return new Response($pageContent);
     }
 }
