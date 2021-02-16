@@ -4,55 +4,30 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter3\ToyMvc;
 
-use Book\Part1\Chapter3\ToyMvc\Controller\CategoryPageController;
+use Book\Part1\Chapter3\ToyMvc\Controller\ControllerFactory;
 use Book\Part1\Chapter3\ToyMvc\Controller\ControllerInterface;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
-use Book\Part1\Chapter3\ToyMvc\Controller\Error\NotFoundController;
-use Book\Part1\Chapter3\ToyMvc\Controller\HomePageController;
-use Book\Part1\Chapter3\ToyMvc\Controller\PostPageController;
-use Book\Part1\Chapter3\ToyMvc\Meta\Route;
-use InvalidArgumentException;
-use ReflectionClass;
-use ReflectionException;
+use Book\Part1\Chapter3\ToyMvc\Controller\RequestDataFactory;
+
 
 final class FrontController
 {
-    /**
-     * @see https://phpstan.org/writing-php-code/phpdoc-types#class-string
-     *
-     * @var array<int, class-string<ControllerInterface>>|ControllerInterface[]
-     */
-    private const CONTROLLERS = [
-        HomePageController::class,
-        CategoryPageController::class,
-        PostPageController::class,
-    ];
-
-    public function getController(RequestData $requestData): ControllerInterface
-    {
-        foreach (self::CONTROLLERS as $controllerFqn) {
-            $route = $this->getRoute($controllerFqn);
-            if ($route->isMatch($requestData)) {
-                return $controllerFqn::create($route->getMatchGroups());
-            }
-        }
-
-        return NotFoundController::create([]);
+    public function __construct(
+        private ControllerFactory $controllerFactory,
+        private RequestDataFactory $requestDataFactory
+    ) {
     }
 
-    /**
-     * @param class-string $controllerFqn
-     *
-     * @throws ReflectionException
-     */
-    private function getRoute(string $controllerFqn): Route
+    public function handleRequest(): void
     {
-        $route = (new ReflectionClass($controllerFqn))->getAttributes(Route::class)[0]->newInstance();
-        if ($route instanceof Route) {
-            return $route;
-        }
-        throw new InvalidArgumentException(
-            'Controller ' . $controllerFqn . ' does not have a Route attribute'
-        );
+        $requestData = $this->requestDataFactory::createFromGlobals();
+        $this->createController($requestData)
+             ->getResponse($requestData)
+             ->send();
+    }
+
+    private function createController(RequestData $requestData): ControllerInterface
+    {
+        return $this->controllerFactory->createControllerForRequest($requestData);
     }
 }

@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  * @small
  *
  * @internal
- * @coversNothing
+ * @covers \Book\Part1\Chapter3\ToyMvc\Model\Collection\CategoryCollection
  */
 final class CategoryCollectionTest extends TestCase
 {

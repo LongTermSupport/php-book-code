@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  * @small
  *
  * @internal
- * @coversNothing
+ * @covers \Book\Part1\Chapter3\ToyMvc\Model\Entity\Uuid
  */
 final class UuidTest extends TestCase
 {
