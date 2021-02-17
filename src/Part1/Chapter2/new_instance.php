@@ -31,4 +31,4 @@ echo "\nSleeper Asleep:\n{$sleeperAsleep}";
 
 echo "\nNow unserializing with allowed classes:";
 $sleeper2 = unserialize($sleeperAsleep, ['allowed_classes' => [Sleeper::class]]);
-echo "\n\$sleeper == \$sleeper2? " . var_export($sleeper === $sleeper2, true);
+echo "\n\$sleeper === \$sleeper2? " . var_export($sleeper === $sleeper2, true);
