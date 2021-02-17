@@ -27,15 +27,6 @@ final class HomePageController implements ControllerInterface
     ) {
     }
 
-    /** @param array<mixed,string> $uriMatches */
-    public static function create(array $uriMatches): static
-    {
-        return new self(
-            new CategoryRepository(),
-            new TemplateRenderer()
-        );
-    }
-
     public function getResponse(RequestData $requestData): Response
     {
         $collection  = $this->categoryRepository->loadAll();

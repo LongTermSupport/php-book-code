@@ -7,6 +7,8 @@ namespace Book\Tests\Small\Part1\Chapter3\ToyMvc\Controller;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 use Book\Part1\Chapter3\ToyMvc\Controller\HomePageController;
+use Book\Part1\Chapter3\ToyMvc\Model\Repository\CategoryRepository;
+use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,10 +19,17 @@ use PHPUnit\Framework\TestCase;
  */
 final class HomePageControllerTest extends TestCase
 {
+    private HomePageController $controller;
+
+    public function setUp(): void
+    {
+        $this->controller = new HomePageController(new CategoryRepository(), new TemplateRenderer());
+    }
+
     /** @test */
     public function itLoadsTheHomePage(): void
     {
-        $response = HomePageController::create([])
+        $response = $this->controller
             ->getResponse(
                 new RequestData(
                     '/',

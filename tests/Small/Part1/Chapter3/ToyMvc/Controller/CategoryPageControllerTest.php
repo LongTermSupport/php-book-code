@@ -8,9 +8,9 @@ use Book\Part1\Chapter3\ToyMvc\Controller\CategoryPageController;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 use Book\Part1\Chapter3\ToyMvc\FakeDataForToy;
-use Book\Part1\Chapter3\ToyMvc\Meta\Route;
+use Book\Part1\Chapter3\ToyMvc\Model\Entity\CategoryEntity;
+use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
 /**
  * @small
@@ -20,13 +20,21 @@ use RuntimeException;
  */
 final class CategoryPageControllerTest extends TestCase
 {
+    private CategoryPageController $controller;
+    private CategoryEntity         $categoryEntity;
+
+    public function setUp(): void
+    {
+        $this->categoryEntity = FakeDataForToy::singleton()->getCategoryEntities()[0];
+        $this->controller     = new CategoryPageController($this->categoryEntity, new TemplateRenderer());
+    }
+
     /** @test */
     public function itLoadsThePage(): void
     {
         $uri         = $this->getUri();
         $requestData = new RequestData($uri, new RequestMethod(RequestMethod::METHOD_GET));
-        $uriMatches  = $this->getUriMatches($requestData);
-        $response    = CategoryPageController::create($uriMatches)->getResponse($requestData);
+        $response    = $this->controller->getResponse($requestData);
         ob_start();
         $response->send();
         $actual = (string)ob_get_clean();
@@ -35,21 +43,8 @@ final class CategoryPageControllerTest extends TestCase
 
     private function getUri(): string
     {
-        $catId = (string)FakeDataForToy::singleton()->getCat1Id();
+        $catIdString = (string)$this->categoryEntity->getUuid();
 
-        return '/c/' . $catId;
-    }
-
-    /**
-     * @return array<mixed,string>
-     */
-    private function getUriMatches(RequestData $requestData): array
-    {
-        $route = new Route(CategoryPageController::ROUTE_REGEX, RequestMethod::METHOD_GET);
-        if ($route->isMatch($requestData) === false) {
-            throw new RuntimeException('Failed matching URI ' . $requestData->getUri());
-        }
-
-        return $route->getMatchGroups();
+        return '/c/' . $catIdString;
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter3\ToyMvc\Controller;
+namespace Book\Part1\Chapter3\ToyMvc\Controller\Factory;
 
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;

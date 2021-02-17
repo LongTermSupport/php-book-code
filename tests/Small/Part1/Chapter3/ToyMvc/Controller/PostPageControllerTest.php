@@ -8,7 +8,8 @@ use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 use Book\Part1\Chapter3\ToyMvc\Controller\PostPageController;
 use Book\Part1\Chapter3\ToyMvc\FakeDataForToy;
-use Book\Part1\Chapter3\ToyMvc\Meta\Route;
+use Book\Part1\Chapter3\ToyMvc\Model\Entity\PostEntity;
+use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -20,13 +21,25 @@ use RuntimeException;
  */
 final class PostPageControllerTest extends TestCase
 {
+    private PostEntity         $postEntity;
+    private PostPageController $controller;
+
+    public function setUp(): void
+    {
+        $postEntity = current(FakeDataForToy::singleton()->getPostEntities());
+        if ($postEntity === false) {
+            throw new RuntimeException('failed getting post entity');
+        }
+        $this->postEntity = $postEntity;
+        $this->controller = new PostPageController($this->postEntity, new TemplateRenderer());
+    }
+
     /** @test */
     public function itLoadsThePage(): void
     {
         $uri         = $this->getUri();
         $requestData = new RequestData($uri, new RequestMethod(RequestMethod::METHOD_GET));
-        $uriMatches  = $this->getUriMatches($requestData);
-        $response    = PostPageController::create($uriMatches)->getResponse($requestData);
+        $response    = $this->controller->getResponse($requestData);
         ob_start();
         $response->send();
         $actual = (string)ob_get_clean();
@@ -35,25 +48,8 @@ final class PostPageControllerTest extends TestCase
 
     private function getUri(): string
     {
-        $postEntity = current(FakeDataForToy::singleton()->getPostEntities());
-        if ($postEntity === false) {
-            throw new RuntimeException('Failed getting post entity');
-        }
-        $postId = (string)$postEntity->getUuid();
+        $postIdString = (string)$this->postEntity->getUuid();
 
-        return '/p/' . $postId;
-    }
-
-    /**
-     * @return array<mixed,string>
-     */
-    private function getUriMatches(RequestData $requestData): array
-    {
-        $route = new Route(PostPageController::ROUTE_REGEX, RequestMethod::METHOD_GET);
-        if ($route->isMatch($requestData) === false) {
-            throw new RuntimeException('Failed matching URI ' . $requestData->getUri());
-        }
-
-        return $route->getMatchGroups();
+        return '/p/' . $postIdString;
     }
 }
