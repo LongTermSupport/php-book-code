@@ -16,7 +16,7 @@ final class TemplateRenderer
      * The data variable is available to the template which is simple PHP that is then required. The ob_ functions use
      * output buffering to capture the output of the template and then allow us ot return it as a string
      */
-    public function renderTemplate(string $templateName, TemplateDataInterface $data): string
+    public function renderTemplate(string $templateName, TemplateDataInterface $templateData): string
     {
         ob_start();
         require __DIR__ . '/Template/' . basename($templateName);

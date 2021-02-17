@@ -9,6 +9,7 @@ use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 use Book\Part1\Chapter3\ToyMvc\Controller\PostPageController;
 use Book\Part1\Chapter3\ToyMvc\FakeDataForToy;
 use Book\Part1\Chapter3\ToyMvc\Model\Entity\PostEntity;
+use Book\Part1\Chapter3\ToyMvc\Model\Repository\PostRepository;
 use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -31,7 +32,7 @@ final class PostPageControllerTest extends TestCase
             throw new RuntimeException('failed getting post entity');
         }
         $this->postEntity = $postEntity;
-        $this->controller = new PostPageController($this->postEntity, new TemplateRenderer());
+        $this->controller = new PostPageController(new PostRepository(), new TemplateRenderer());
     }
 
     /** @test */

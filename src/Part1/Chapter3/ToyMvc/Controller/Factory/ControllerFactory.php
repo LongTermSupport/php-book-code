@@ -11,7 +11,6 @@ use Book\Part1\Chapter3\ToyMvc\Controller\Error\NotFoundController;
 use Book\Part1\Chapter3\ToyMvc\Controller\HomePageController;
 use Book\Part1\Chapter3\ToyMvc\Controller\PostPageController;
 use Book\Part1\Chapter3\ToyMvc\Meta\Route;
-use Book\Part1\Chapter3\ToyMvc\Model\Entity\Uuid;
 use Book\Part1\Chapter3\ToyMvc\Model\Repository\CategoryRepository;
 use Book\Part1\Chapter3\ToyMvc\Model\Repository\PostRepository;
 use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
@@ -28,7 +27,7 @@ final class ControllerFactory
      *
      * @see https://phpstan.org/writing-php-code/phpdoc-types#class-string
      *
-     * @var array<int, class-string<ControllerInterface>>|ControllerInterface[]
+     * @var array<int, class-string<ControllerInterface>>
      */
     private const CONTROLLERS = [
         HomePageController::class,
@@ -61,8 +60,8 @@ final class ControllerFactory
             if ($route->isMatch($requestData)) {
                 return match ($controllerFqn) {
                     HomePageController::class     => $this->createHomePageController(),
-                    CategoryPageController::class => $this->createCategoryPageController($route->getMatchGroups()),
-                    PostPageController::class     => $this->createPostPageController($route->getMatchGroups()),
+                    CategoryPageController::class => $this->createCategoryPageController(),
+                    PostPageController::class     => $this->createPostPageController(),
                 };
             }
         }
@@ -80,6 +79,16 @@ final class ControllerFactory
         return new HomePageController($this->categoryRepository, $this->templateRenderer);
     }
 
+    private function createCategoryPageController(): CategoryPageController
+    {
+        return new CategoryPageController($this->categoryRepository, $this->templateRenderer);
+    }
+
+    private function createPostPageController(): PostPageController
+    {
+        return new PostPageController($this->postRepository, $this->templateRenderer);
+    }
+
     /**
      * @param class-string<ControllerInterface> $controllerFqn
      *
@@ -94,31 +103,5 @@ final class ControllerFactory
         throw new InvalidArgumentException(
             'Controller ' . $controllerFqn . ' does not have a Route attribute'
         );
-    }
-
-    /** @param array<mixed,string> $matchGroups */
-    private function createCategoryPageController(array $matchGroups): CategoryPageController
-    {
-        $uuid           = $this->createUuid($matchGroups);
-        $categoryEntity = $this->categoryRepository->load($uuid);
-
-        return new CategoryPageController($categoryEntity, $this->templateRenderer);
-    }
-
-    /** @param array<mixed,string> $matchGroups */
-    private function createPostPageController(array $matchGroups): PostPageController
-    {
-        $uuid       = $this->createUuid($matchGroups);
-        $postEntity = $this->postRepository->load($uuid);
-
-        return new PostPageController($postEntity, $this->templateRenderer);
-    }
-
-    /** @param array<mixed,string> $matchGroups */
-    private function createUuid(array $matchGroups): Uuid
-    {
-        $id = $matchGroups['id'];
-
-        return new Uuid($id);
     }
 }

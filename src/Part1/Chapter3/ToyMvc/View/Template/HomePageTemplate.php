@@ -7,7 +7,7 @@ namespace Book\Part1\Chapter3\ToyMvc\View\Template;
 use Book\Part1\Chapter3\ToyMvc\View\Data\HomePageData;
 use Book\Part1\Chapter3\ToyMvc\View\Esc;
 
-/* @var $data HomePageData */
+/* @var $templateData HomePageData */
 
 ?>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ use Book\Part1\Chapter3\ToyMvc\View\Esc;
 <body>
 <h1>Categories</h1>
 <ul>
-    <?php foreach ($data->getCategoryCollection() as $catId => $category) { ?>
+    <?php foreach ($templateData->getCategoryCollection() as $catId => $category) { ?>
         <li><a href="/c/<?php echo $catId; ?>"><?php echo Esc::_($category->getName()); ?></a>
             <ol>
                 <?php foreach ($category->getPostCollection() as $postId => $post) { ?>

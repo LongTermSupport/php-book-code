@@ -7,8 +7,8 @@ namespace Book\Part1\Chapter3\ToyMvc\View\Template;
 use Book\Part1\Chapter3\ToyMvc\View\Data\CategoryPageData;
 use Book\Part1\Chapter3\ToyMvc\View\Esc;
 
-/** @var CategoryPageData $data */
-$category = $data->getCategory();
+/** @var CategoryPageData $templateData */
+$category = $templateData->getCategory();
 ?>
 <!DOCTYPE html>
 <html>

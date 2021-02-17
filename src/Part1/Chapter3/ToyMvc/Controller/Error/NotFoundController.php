@@ -31,7 +31,7 @@ final class NotFoundController implements ControllerInterface
     {
         return $this->templateRenderer->renderTemplate(
             templateName: self::TEMPLATE_NAME,
-            data: $this->getEmptyData()
+            templateData: $this->getEmptyData()
         );
     }
 

@@ -7,8 +7,8 @@ namespace Book\Part1\Chapter3\ToyMvc\View\Template;
 use Book\Part1\Chapter3\ToyMvc\View\Data\PostPageData;
 use Book\Part1\Chapter3\ToyMvc\View\Esc;
 
-/** @var PostPageData $data */
-$post = $data->getPost();
+/** @var PostPageData $templateData */
+$post = $templateData->getPost();
 ?>
 <!DOCTYPE html>
 <html>

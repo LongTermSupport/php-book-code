@@ -9,6 +9,7 @@ use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 use Book\Part1\Chapter3\ToyMvc\FakeDataForToy;
 use Book\Part1\Chapter3\ToyMvc\Model\Entity\CategoryEntity;
+use Book\Part1\Chapter3\ToyMvc\Model\Repository\CategoryRepository;
 use Book\Part1\Chapter3\ToyMvc\View\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
 
@@ -26,7 +27,7 @@ final class CategoryPageControllerTest extends TestCase
     public function setUp(): void
     {
         $this->categoryEntity = FakeDataForToy::singleton()->getCategoryEntities()[0];
-        $this->controller     = new CategoryPageController($this->categoryEntity, new TemplateRenderer());
+        $this->controller     = new CategoryPageController(new CategoryRepository(), new TemplateRenderer());
     }
 
     /** @test */

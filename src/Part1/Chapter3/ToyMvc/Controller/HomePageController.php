@@ -29,9 +29,9 @@ final class HomePageController implements ControllerInterface
 
     public function getResponse(RequestData $requestData): Response
     {
-        $collection  = $this->categoryRepository->loadAll();
-        $data        = new HomePageData($collection);
-        $pageContent = $this->templateRenderer->renderTemplate(self::TEMPLATE_NAME, $data);
+        $collection   = $this->categoryRepository->loadAll();
+        $templateData = new HomePageData($collection);
+        $pageContent  = $this->templateRenderer->renderTemplate(self::TEMPLATE_NAME, $templateData);
 
         return new Response($pageContent);
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Book\Part1\Chapter3\ToyMvc\Model\Entity;
 
 use InvalidArgumentException;
+use RuntimeException;
 use Stringable;
 
 /**
@@ -13,8 +14,8 @@ use Stringable;
  */
 final class Uuid implements Stringable
 {
-    public const DATA_KEY  = 'uuid';
-    private const VERSION  = 4;
+    public const ROUTE_MATCH_KEY  = 'id';
+    private const VERSION         = 4;
 
     public function __construct(private string $uuid)
     {
@@ -50,8 +51,19 @@ final class Uuid implements Stringable
         return (string)$this === (string)$uuid;
     }
 
+    public static function createFromUri(string $uri, string $pattern): self
+    {
+        if (preg_match($pattern, $uri, $matchGroups) !== 1) {
+            throw new RuntimeException('Failed matching uri ' . $uri . ' with pattern ' . $pattern);
+        }
+        $id = $matchGroups[self::ROUTE_MATCH_KEY]
+              ?? throw new RuntimeException('matchGroups does not include ' . self::ROUTE_MATCH_KEY);
+
+        return new self($id);
+    }
+
     private function isValid(string $uuid): bool
     {
-        return (bool)preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di', $uuid);
+        return preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di', $uuid) === 1;
     }
 }
