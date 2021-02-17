@@ -7,7 +7,7 @@ namespace Book\Part1\Chapter3\ToyMvc\Controller;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 
-class RequestDataFactory
+final class RequestDataFactory
 {
     public static function createFromGlobals(): RequestData
     {

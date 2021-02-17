@@ -16,7 +16,7 @@ final class ControllerFactory
     /**
      * Here we have an array of controller FQNs.
      * These represent the controllers that we will
-     * check for matching a given set of RequestData
+     * check for matching a given set of RequestData.
      *
      * @see https://phpstan.org/writing-php-code/phpdoc-types#class-string
      *

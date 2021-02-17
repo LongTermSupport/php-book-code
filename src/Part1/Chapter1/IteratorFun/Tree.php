@@ -7,7 +7,7 @@ namespace Book\Part1\Chapter1\IteratorFun;
 use RecursiveDirectoryIterator;
 use RecursiveTreeIterator;
 
-class Tree
+final class Tree
 {
     public function getAsciiTree(string $path): string
     {

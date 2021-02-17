@@ -9,7 +9,6 @@ use Book\Part1\Chapter3\ToyMvc\Controller\ControllerInterface;
 use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestData;
 use Book\Part1\Chapter3\ToyMvc\Controller\RequestDataFactory;
 
-
 final class FrontController
 {
     public function __construct(
@@ -22,8 +21,9 @@ final class FrontController
     {
         $requestData = $this->requestDataFactory::createFromGlobals();
         $this->createController($requestData)
-             ->getResponse($requestData)
-             ->send();
+            ->getResponse($requestData)
+            ->send()
+        ;
     }
 
     private function createController(RequestData $requestData): ControllerInterface
