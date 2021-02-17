@@ -73,7 +73,7 @@ final class FakeDataForToy
 
     public static function singleton(): self
     {
-        return static::$instance ?? static::$instance = new self();
+        return self::$instance ?? self::$instance = new self();
     }
 
     public function getCat1Id(): Uuid
