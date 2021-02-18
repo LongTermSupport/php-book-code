@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Book\Part1\Chapter3\ToyMvc;
 
 /**
- * This callable object lets us very simply simulate a browser visiting our toy MVC app.
+ * This class lets us very simply simulate a browser visiting our toy MVC app.
  */
 final class BrowserVisit
 {
