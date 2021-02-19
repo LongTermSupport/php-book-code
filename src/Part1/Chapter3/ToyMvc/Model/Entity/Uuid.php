@@ -9,12 +9,13 @@ use RuntimeException;
 use Stringable;
 
 /**
- * This is a very simple UUID generator, inspired by https://github.com/abmmhasan/UUID/blob/main/src/Uuid.php
+ * This is a very simple UUID generator,
+ * inspired by https://github.com/abmmhasan/UUID/blob/main/src/Uuid.php
  * This is not suggested for production code!
  */
 final class Uuid implements Stringable
 {
-    public const ROUTE_MATCH_KEY  = 'id';
+    public const  ROUTE_MATCH_KEY = 'id';
     private const VERSION         = 4;
 
     public function __construct(private string $uuid)
