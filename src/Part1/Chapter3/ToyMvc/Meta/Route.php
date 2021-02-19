@@ -25,7 +25,7 @@ final class Route
 
     public function isMatch(RequestData $requestData): bool
     {
-        return $this->matchesMethod($requestData) && $this->matchesRoutePattern($requestData);
+        return $this->matchesMethodName($requestData) && $this->matchesRoutePattern($requestData);
     }
 
     private function matchesRoutePattern(RequestData $requestData): bool
@@ -33,7 +33,7 @@ final class Route
         return preg_match($this->routePattern, $requestData->getUri()) === 1;
     }
 
-    private function matchesMethod(RequestData $requestData): bool
+    private function matchesMethodName(RequestData $requestData): bool
     {
         return isset($this->methodNames[$requestData->getMethod()->getName()]);
     }

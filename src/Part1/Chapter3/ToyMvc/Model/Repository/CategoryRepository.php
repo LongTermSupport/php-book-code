@@ -12,12 +12,9 @@ use RuntimeException;
 
 final class CategoryRepository
 {
-    /**
-     * This is just for the toy,
-     * you would never normally store all your data in your repository!
-     *
-     * @var CategoryEntity[]*
-     */
+    //This is just for the toy,
+    //you would never normally store all your data in your repository!
+    /** @var CategoryEntity[] */
     private array $data;
 
     public function __construct()
