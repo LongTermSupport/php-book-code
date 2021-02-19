@@ -15,7 +15,7 @@ use Stringable;
  */
 final class Uuid implements Stringable
 {
-    public const  ROUTE_MATCH_KEY = 'id';
+    public const ROUTE_MATCH_KEY  = 'id';
     private const VERSION         = 4;
 
     public function __construct(private string $uuid)

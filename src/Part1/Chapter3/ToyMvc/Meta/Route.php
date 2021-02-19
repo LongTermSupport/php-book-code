@@ -11,17 +11,16 @@ use Book\Part1\Chapter3\ToyMvc\Controller\Data\RequestMethod;
 #[Attribute]
 final class Route
 {
-    /** @var RequestMethod[] */
-    private array $methods;
+    /** @var array<string, bool> */
+    private array $methodNames;
 
-    public function __construct(private string $routePattern, string ...$methods)
+    public function __construct(private string $routePattern, string ...$methodNames)
     {
-        $this->methods = array_map(
-            callback: static function (string $method): RequestMethod {
-                return new RequestMethod($method);
-            },
-            array: $methods
-        );
+        foreach ($methodNames as $methodName) {
+            RequestMethod::assertIsValidName($methodName);
+
+            $this->methodNames[$methodName] = true;
+        }
     }
 
     public function isMatch(RequestData $requestData): bool
@@ -36,12 +35,6 @@ final class Route
 
     private function matchesMethod(RequestData $requestData): bool
     {
-        foreach ($this->methods as $method) {
-            if ($method->getName() === $requestData->getMethod()->getName()) {
-                return true;
-            }
-        }
-
-        return false;
+        return isset($this->methodNames[$requestData->getMethod()->getName()]);
     }
 }

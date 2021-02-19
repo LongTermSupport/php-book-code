@@ -7,6 +7,8 @@ namespace Book\Part1\Chapter3\ToyMvc\View\Template;
 use Book\Part1\Chapter3\ToyMvc\View\Data\HomePageData;
 use Book\Part1\Chapter3\ToyMvc\View\Esc;
 
+// Note this one line of DocBlock allows all of the code in this template to be statically analysed
+// and allows our IDE to autocomplete all method calls etc for us
 /* @var $templateData HomePageData */
 
 ?>
