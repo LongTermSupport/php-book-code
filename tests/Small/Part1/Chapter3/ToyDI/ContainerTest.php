@@ -23,7 +23,8 @@ use PHPUnit\Framework\TestCase;
  * @small
  *
  * @internal
- * @coversNothing
+ * @covers \Book\Part1\Chapter3\ToyDI\ServiceFactory
+ * @covers \Book\Part1\Chapter3\ToyDI\ServiceLocator
  */
 final class ContainerTest extends TestCase
 {

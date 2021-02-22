@@ -17,7 +17,7 @@ use Book\Part1\Chapter3\ToyDI\Service\MathsStuff\MathsInterface;
 
 final class AppContainerFactory
 {
-    private const SERVICES = [
+    private const SERVICE_IDS_TO_CLASSES = [
         MathsInterface::class     => AdditionService::class,
         EchoStuffInterface::class => EchoBarService::class,
         LevelOneService::class    => LevelOneService::class,
@@ -37,7 +37,7 @@ final class AppContainerFactory
     private function getSimpleDefinitions(): array
     {
         $definitions = [];
-        foreach (self::SERVICES as $id => $className) {
+        foreach (self::SERVICE_IDS_TO_CLASSES as $id => $className) {
             $definitions[] = $this->getSimpleDefinition($id, $className);
         }
 

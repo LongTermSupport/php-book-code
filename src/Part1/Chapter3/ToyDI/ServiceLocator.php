@@ -28,6 +28,10 @@ final class ServiceLocator implements ContainerInterface
         $this->serviceFactory = new ServiceFactory(array_values(array_unique($this->idsToClassNames)));
     }
 
+    // this is the first of the two methods defined in the PSR ContainerInterface.
+    // The interface does not define a param type and so we are not able to either
+    // due to the contravariance (remember that) rules that say parameter types are only able to become looser
+    // thanks to covariance rules, we are able to add return type hints though
     public function get($id): object
     {
         // if we already have an instance stored, we just return that
@@ -38,6 +42,7 @@ final class ServiceLocator implements ContainerInterface
             ??= $this->createInstance($id);
     }
 
+    // this is the second of the two methods defined in the PSR ContainerInterface.
     public function has($id): bool
     {
         try {
@@ -49,8 +54,6 @@ final class ServiceLocator implements ContainerInterface
         }
     }
 
-    // due to the PSR interface not defining types, we are not able to add a type here as that would break
-    // remember the rules on Contravariance discussed in Chapter 2; parameter types can only get less specific
     private function storeDefinition(ServiceDefinitionInterface $serviceDefinition): void
     {
         foreach ($serviceDefinition->getIds() as $id) {
@@ -70,13 +73,13 @@ final class ServiceLocator implements ContainerInterface
     /**
      * @return class-string
      */
-    private function getClassFullyQualifiedNameForId(string $idOrClassName): string
+    private function getClassFullyQualifiedNameForId(string $id): string
     {
-        if (array_key_exists($idOrClassName, $this->idsToClassNames)) {
+        if (array_key_exists($id, $this->idsToClassNames)) {
             // we return the fully qualified class name the service ID maps to
-            return $this->idsToClassNames[$idOrClassName];
+            return $this->idsToClassNames[$id];
         }
-        throw new class('Failed finding service class for ' . $idOrClassName) extends Exception implements NotFoundExceptionInterface {
+        throw new class('Failed finding service class for ' . $id) extends Exception implements NotFoundExceptionInterface {
         };
     }
 }
