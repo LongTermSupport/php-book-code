@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Part1\Chapter3\ToyServiceLocator\Service\EchoStuff;
 
-class EchoFooService implements EchoStuffInterface
+final class EchoFooService implements EchoStuffInterface
 {
     public function echoSomething(): void
     {

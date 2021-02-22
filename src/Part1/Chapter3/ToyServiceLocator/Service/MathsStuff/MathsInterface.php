@@ -6,5 +6,5 @@ namespace Book\Part1\Chapter3\ToyServiceLocator\Service\MathsStuff;
 
 interface MathsInterface
 {
-    public function getResult(int|float $numberOne, int|float $numberTwo): int|float;
+    public function getResult(int | float $numberOne, int | float $numberTwo): int | float;
 }
