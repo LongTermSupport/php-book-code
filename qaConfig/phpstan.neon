@@ -38,7 +38,10 @@ parameters:
         # Chapter 3
         -
             message: '#Cannot cast tidy to string#'
-            path: ./../src/Part1/Chapter3/ToyMvc/View/TemplateRenderer.php
+            path: ./../src/Part1/Chapter3/ToyMVC/View/TemplateRenderer.php
         -
             message: '#Variable \$templateData might not be defined#'
-            path: ./../src/Part1/Chapter3/ToyMvc/View/Template/*
+            path: ./../src/Part1/Chapter3/ToyMVC/View/Template/*
+        -
+            message: '#getClassFullyQualifiedName\(\) should return class-string but returns string#'
+            path: ./../src/Part1/Chapter3/ToyDI/Container.php

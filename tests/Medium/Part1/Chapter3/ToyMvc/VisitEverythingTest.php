@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Tests\Medium\Part1\Chapter3\ToyMvc;
 
-use Book\Part1\Chapter3\ToyMvc\BrowserVisit;
+use Book\Part1\Chapter3\ToyMVC\BrowserVisit;
 use PHPUnit\Framework\TestCase;
 
 /**

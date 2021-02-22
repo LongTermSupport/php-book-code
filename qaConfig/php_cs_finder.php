@@ -10,6 +10,7 @@ const NOT_PATHS = [
     'Part1/Chapter2/object_comparison.php',
     'Part1/Chapter2/void.php',
     'Part1/Chapter3/early_return.php',
+    'Part1/Chapter3/ToyDI/SimpleServiceDefinition.php',
 ];
 
 return PhpCsFixer\Finder::create()
