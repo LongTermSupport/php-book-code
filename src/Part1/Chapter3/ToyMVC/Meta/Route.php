@@ -28,13 +28,13 @@ final class Route
         return $this->matchesMethodName($requestData) && $this->matchesRoutePattern($requestData);
     }
 
-    private function matchesRoutePattern(RequestData $requestData): bool
-    {
-        return preg_match($this->routePattern, $requestData->getUri()) === 1;
-    }
-
     private function matchesMethodName(RequestData $requestData): bool
     {
         return isset($this->methodNames[$requestData->getMethod()->getName()]);
+    }
+
+    private function matchesRoutePattern(RequestData $requestData): bool
+    {
+        return preg_match($this->routePattern, $requestData->getUri()) === 1;
     }
 }

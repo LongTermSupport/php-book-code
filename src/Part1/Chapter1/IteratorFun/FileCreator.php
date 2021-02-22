@@ -50,6 +50,36 @@ final class FileCreator
         }
     }
 
+    private function makeDir(string $path): void
+    {
+        if (
+            !mkdir($path, 0777, true)
+            && !is_dir($path)
+        ) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $path));
+        }
+    }
+
+    /**
+     * @return RecursiveIteratorIterator<RecursiveDirectoryIterator>
+     */
+    private function getIterator(Config $config): RecursiveIteratorIterator
+    {
+        $directoryIterator = new RecursiveDirectoryIterator(
+            directory: $config->getBaseDir(),
+            flags: RecursiveDirectoryIterator::SKIP_DOTS
+        );
+
+        /*
+         * The SELF_FIRST flag means that we list the directory and then the files in there.
+         */
+
+        return new RecursiveIteratorIterator(
+            $directoryIterator,
+            mode: RecursiveIteratorIterator::SELF_FIRST
+        );
+    }
+
     /**
      * As we are actively creating files, it can cause us to hit the same path multiple times
      * This check ensures we only hit a single directory once.
@@ -89,34 +119,5 @@ final class FileCreator
         }
 
         return $filename;
-    }
-
-    /**
-     * @return RecursiveIteratorIterator<RecursiveDirectoryIterator>
-     */
-    private function getIterator(Config $config): RecursiveIteratorIterator
-    {
-        $directoryIterator = new RecursiveDirectoryIterator(
-            directory: $config->getBaseDir(),
-            flags: RecursiveDirectoryIterator::SKIP_DOTS
-        );
-
-        /*
-         * The SELF_FIRST flag means that we list the directory and then the files in there.
-         */
-        return new RecursiveIteratorIterator(
-            $directoryIterator,
-            mode: RecursiveIteratorIterator::SELF_FIRST
-        );
-    }
-
-    private function makeDir(string $path): void
-    {
-        if (
-            !mkdir($path, 0777, true)
-            && !is_dir($path)
-        ) {
-            throw new RuntimeException(sprintf('Directory "%s" was not created', $path));
-        }
     }
 }

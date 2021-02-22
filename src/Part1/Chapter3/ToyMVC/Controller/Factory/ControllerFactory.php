@@ -69,9 +69,20 @@ final class ControllerFactory
         return $this->createNotFoundController();
     }
 
-    private function createNotFoundController(): NotFoundController
+    /**
+     * @param class-string<ControllerInterface> $controllerFqn
+     *
+     * @throws ReflectionException
+     */
+    private function getRoute(string $controllerFqn): Route
     {
-        return new NotFoundController($this->templateRenderer);
+        $route = (new ReflectionClass($controllerFqn))->getAttributes(Route::class)[0]->newInstance();
+        if ($route instanceof Route) {
+            return $route;
+        }
+        throw new InvalidArgumentException(
+            'Controller ' . $controllerFqn . ' does not have a Route attribute'
+        );
     }
 
     private function createHomePageController(): HomePageController
@@ -89,19 +100,8 @@ final class ControllerFactory
         return new PostPageController($this->postRepository, $this->templateRenderer);
     }
 
-    /**
-     * @param class-string<ControllerInterface> $controllerFqn
-     *
-     * @throws ReflectionException
-     */
-    private function getRoute(string $controllerFqn): Route
+    private function createNotFoundController(): NotFoundController
     {
-        $route = (new ReflectionClass($controllerFqn))->getAttributes(Route::class)[0]->newInstance();
-        if ($route instanceof Route) {
-            return $route;
-        }
-        throw new InvalidArgumentException(
-            'Controller ' . $controllerFqn . ' does not have a Route attribute'
-        );
+        return new NotFoundController($this->templateRenderer);
     }
 }

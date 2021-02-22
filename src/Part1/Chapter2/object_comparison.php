@@ -23,4 +23,7 @@ echo "\n" . '$instanceOne identical to $referenceOne? ' . var_export($instanceOn
 
 $instanceOne->foo = 'bar';
 
-echo "\n" . '$instanceOne with foo equal to $instanceTwo?      ' . var_export($instanceOne === $instanceTwo, true) . "\n";
+echo "\n" .
+     '$instanceOne with foo equal to $instanceTwo?      ' .
+     var_export($instanceOne === $instanceTwo, true) .
+     "\n";

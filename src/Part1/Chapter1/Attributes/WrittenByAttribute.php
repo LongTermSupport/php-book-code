@@ -9,6 +9,7 @@ use Attribute;
 /*
  * This class is the attribute itself. It has the magical `#[Attribute]` attribute which marks it as such
  */
+
 #[Attribute]
 final class WrittenByAttribute
 {

@@ -6,7 +6,7 @@ namespace Book\Part1\Chapter1\StaticAccess;
 
 class ParentClass
 {
-    private const ZIP          = '123';
+    private const ZIP = '123';
     private static string $foo = 'bar';
 
     public static function getStringSelf(): string

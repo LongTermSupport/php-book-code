@@ -25,6 +25,7 @@ final class FilterBlueFiles
     private function getIterator(Config $config): FilterIterator
     {
         $directoryIterator = new RecursiveDirectoryIterator(directory: $config->getBaseDir());
+
         // Anonymous class
         return new class(new RecursiveIteratorIterator($directoryIterator)) extends FilterIterator {
             public function accept(): bool

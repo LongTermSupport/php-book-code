@@ -7,6 +7,8 @@ namespace Book\Tests\Small\Part1\Chapter3\ToyDI;
 use Book\Part1\Chapter3\ToyDI\AppContainerFactory;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelOneService;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeDep;
+use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeService;
+use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelTwoService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoBarService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoFooService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoStuffInterface;
@@ -36,14 +38,12 @@ final class ContainerTest extends TestCase
     public function itCanGetEchoService(): void
     {
         self::assertInstanceOf(EchoBarService::class, $this->container->get(EchoStuffInterface::class));
-        self::assertInstanceOf(EchoBarService::class, $this->container->get(EchoBarService::class));
     }
 
     /** @test */
     public function itCanGetMathsService(): void
     {
         self::assertInstanceOf(AdditionService::class, $this->container->get(MathsInterface::class));
-        self::assertInstanceOf(AdditionService::class, $this->container->get(AdditionService::class));
     }
 
     /** @test */
@@ -64,9 +64,10 @@ final class ContainerTest extends TestCase
     public function provideHasStuff(): Generator
     {
         yield EchoStuffInterface::class => [EchoStuffInterface::class];
-        yield EchoBarService::class => [EchoBarService::class];
         yield MathsInterface::class => [MathsInterface::class];
-        yield AdditionService::class => [AdditionService::class];
+        yield LevelOneService::class => [LevelOneService::class];
+        yield LevelTwoService::class => [LevelTwoService::class];
+        yield LevelThreeService::class => [LevelThreeService::class];
     }
 
     /**

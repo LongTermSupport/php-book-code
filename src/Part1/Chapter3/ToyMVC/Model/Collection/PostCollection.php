@@ -22,15 +22,6 @@ final class PostCollection implements Iterator, Countable
         $this->postEntities = $postEntities;
     }
 
-    public function current(): PostEntity
-    {
-        $current = current($this->postEntities);
-
-        return $current instanceof PostEntity
-            ? $current
-            : throw new OutOfBoundsException('Failed getting current PostEntity');
-    }
-
     public function next(): bool | PostEntity
     {
         return next($this->postEntities);
@@ -43,6 +34,15 @@ final class PostCollection implements Iterator, Countable
     public function key(): string
     {
         return (string)$this->current()->getUuid();
+    }
+
+    public function current(): PostEntity
+    {
+        $current = current($this->postEntities);
+
+        return $current instanceof PostEntity
+            ? $current
+            : throw new OutOfBoundsException('Failed getting current PostEntity');
     }
 
     public function valid(): bool

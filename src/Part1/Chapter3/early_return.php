@@ -10,7 +10,7 @@ namespace Book\Part1\Chapter3;
  */
 function isValidValueNested(int|null $value): bool
 {                                            # cylomatic complexity 1
-    if(is_int($value)) {                     # cylomatic complexity 2
+    if (is_int($value)) {                     # cylomatic complexity 2
         if ($value > 10) {                   # cylomatic complexity 3
             if ($value < 200) {              # cylomatic complexity 4
                 return true;
@@ -20,7 +20,7 @@ function isValidValueNested(int|null $value): bool
         } else {                             # cylomatic complexity 6
             return false;
         }
-    }else{                                   # cylomatic complexity 7
+    } else {                                   # cylomatic complexity 7
         return false;
     }
 }
@@ -31,7 +31,7 @@ function isValidValueNested(int|null $value): bool
  */
 function isValidValueEarlyReturn(int|null $value): bool
 {                                        # cylomatic complexity 1
-    if(null === $value){                 # cylomatic complexity 2
+    if (null === $value) {                 # cylomatic complexity 2
         return false;
     }
     if ($value < 10) {                   # cylomatic complexity 3

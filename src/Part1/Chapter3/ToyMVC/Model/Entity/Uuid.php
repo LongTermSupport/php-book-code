@@ -47,11 +47,6 @@ final class Uuid implements Stringable
         return new self($uuidString);
     }
 
-    public function matches(self $uuid): bool
-    {
-        return (string)$this === (string)$uuid;
-    }
-
     public static function createFromUri(string $uri, string $pattern): self
     {
         if (preg_match($pattern, $uri, $matchGroups) !== 1) {
@@ -61,6 +56,11 @@ final class Uuid implements Stringable
               ?? throw new RuntimeException('matchGroups does not include ' . self::ROUTE_MATCH_KEY);
 
         return new self($id);
+    }
+
+    public function matches(self $uuid): bool
+    {
+        return (string)$this === (string)$uuid;
     }
 
     private function isValid(string $uuid): bool

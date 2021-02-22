@@ -18,7 +18,7 @@ final class ServiceFactory
     }
 
     /** @param class-string $className */
-    public function get(string $className): object
+    public function createInstance(string $className): object
     {
         $this->assertServiceClassName($className);
 
@@ -50,7 +50,7 @@ final class ServiceFactory
             throw new InvalidArgumentException("{$className} does not have a constructor");
         }
         foreach ($constructor->getParameters() as $reflectionParameter) {
-            $return[] = $this->get($this->getServiceClassString($reflectionParameter));
+            $return[] = $this->createInstance($this->getServiceClassString($reflectionParameter));
         }
 
         return $return;

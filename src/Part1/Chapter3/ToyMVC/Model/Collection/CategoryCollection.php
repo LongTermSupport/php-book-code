@@ -22,15 +22,6 @@ final class CategoryCollection implements Iterator, Countable
         $this->categoryEntities = $categoryEntities;
     }
 
-    public function current(): CategoryEntity
-    {
-        $current = current($this->categoryEntities);
-
-        return $current instanceof CategoryEntity
-            ? $current
-            : throw new OutOfBoundsException('Failed getting current CategoryEntity');
-    }
-
     public function next(): bool | CategoryEntity
     {
         return next($this->categoryEntities);
@@ -43,6 +34,15 @@ final class CategoryCollection implements Iterator, Countable
     public function key(): string
     {
         return (string)$this->current()->getUuid();
+    }
+
+    public function current(): CategoryEntity
+    {
+        $current = current($this->categoryEntities);
+
+        return $current instanceof CategoryEntity
+            ? $current
+            : throw new OutOfBoundsException('Failed getting current CategoryEntity');
     }
 
     public function valid(): bool

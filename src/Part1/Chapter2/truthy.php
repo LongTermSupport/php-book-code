@@ -20,7 +20,7 @@ function truthy(mixed $input): string
             $switch = 'false';
     }
     $match = match (true) {
-        $input  => 'true',
+        $input => 'true',
         default => 'false',
     };
 
