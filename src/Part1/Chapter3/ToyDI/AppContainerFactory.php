@@ -28,9 +28,9 @@ final class AppContainerFactory
         LevelThreeDep::class      => LevelThreeDep::class,
     ];
 
-    public function buildAppContainer(): Container
+    public function buildAppContainer(): ServiceLocator
     {
-        return new Container(...$this->getSimpleDefinitions());
+        return new ServiceLocator(...$this->getSimpleDefinitions());
     }
 
     /** @return ServiceDefinitionInterface[] */

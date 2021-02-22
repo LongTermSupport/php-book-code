@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Book\Tests\Small\Part1\Chapter3\ToyDI;
 
 use Book\Part1\Chapter3\ToyDI\AppContainerFactory;
-use Book\Part1\Chapter3\ToyDI\Container;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelOneService;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeDep;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoBarService;
@@ -14,6 +13,7 @@ use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoStuffInterface;
 use Book\Part1\Chapter3\ToyDI\Service\MathsStuff\AdditionService;
 use Book\Part1\Chapter3\ToyDI\Service\MathsStuff\MathsInterface;
 use Book\Part1\Chapter3\ToyDI\Service\MathsStuff\MultiplicationService;
+use Book\Part1\Chapter3\ToyDI\ServiceLocator;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +25,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class ContainerTest extends TestCase
 {
-    private Container $container;
+    private ServiceLocator $container;
 
     public function setUp(): void
     {

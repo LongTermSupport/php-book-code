@@ -44,4 +44,8 @@ parameters:
             path: ./../src/Part1/Chapter3/ToyMVC/View/Template/*
         -
             message: '#getClassFullyQualifiedName\(\) should return class-string but returns string#'
-            path: ./../src/Part1/Chapter3/ToyDI/Container.php
+            path: ./../src/Part1/Chapter3/ToyDI/ServiceLocator.php
+
+        -
+            message: '#getServiceClassString\(\) should return class-string but returns string#'
+            path: ./../src/Part1/Chapter3/ToyDI/ServiceFactory.php
