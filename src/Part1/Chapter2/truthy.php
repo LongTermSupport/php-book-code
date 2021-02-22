@@ -6,7 +6,7 @@ namespace Book\Part1\Chapter2;
 
 function truthy(mixed $input): string
 {
-    $equal     = var_export($input == true, true);
+    $equal     = var_export($input === true, true);
     $identical = var_export($input === true, true);
     $if        = var_export(($input) ? true : false, true);
 
