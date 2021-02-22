@@ -5,6 +5,7 @@ declare(strict_types=1);
 const NOT_PATHS = [
     'Part1/Chapter1/ForceInheritance/Person.php',
     'Part1/Chapter1/StaticAccess/ParentClass.php',
+    'Part1/Chapter1/Inheritance/',
     'Part1/Chapter2/object_comparison.php',
     'Part1/Chapter2/void.php',
     'Part1/Chapter3/early_return.php',
