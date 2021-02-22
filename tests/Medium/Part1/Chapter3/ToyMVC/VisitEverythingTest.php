@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Tests\Medium\Part1\Chapter3\ToyMvc;
+namespace Book\Tests\Medium\Part1\Chapter3\ToyMVC;
 
 use Book\Part1\Chapter3\ToyMVC\BrowserVisit;
 use PHPUnit\Framework\TestCase;
