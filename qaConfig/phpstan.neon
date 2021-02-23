@@ -45,3 +45,6 @@ parameters:
         -
             message: '#getServiceClassString\(\) should return class-string but returns string#'
             path: ./../src/Part1/Chapter3/ToyDI/ServiceFactory.php
+        -
+            message: '#tCanGetMathsService\(\) should return .+? but returns array<int, object>#'
+            path: ./../tests/Small/Part1/Chapter3/ToyDI/ContainerTest.php

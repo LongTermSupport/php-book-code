@@ -23,6 +23,7 @@ use PHPUnit\Framework\TestCase;
  * @small
  *
  * @internal
+ * @covers \Book\Part1\Chapter3\ToyDI\ContainerFactory
  * @covers \Book\Part1\Chapter3\ToyDI\ServiceFactory
  * @covers \Book\Part1\Chapter3\ToyDI\ServiceLocator
  */
@@ -48,21 +49,44 @@ final class ContainerTest extends TestCase
         );
     }
 
-    /** @test */
-    public function itCanGetMathsService(): void
+    /**
+     * @test
+     *
+     * @return MathsInterface[]
+     */
+    public function itCanGetMathsService(): array
     {
+        $byInterfaceId = $this->container->get(MathsInterface::class);
         self::assertInstanceOf(
             expected: AdditionService::class,
-            actual: $this->container->get(MathsInterface::class)
+            actual: $byInterfaceId
         );
+        $byClassId = $this->container->get(AdditionService::class);
         self::assertInstanceOf(
             expected: AdditionService::class,
-            actual: $this->container->get(AdditionService::class)
+            actual: $byClassId
         );
+        $byShortName = $this->container->get(ContainerFactory::SHORTHAND_NAME_FOR_MATHS);
         self::assertInstanceOf(
             expected: AdditionService::class,
-            actual: $this->container->get(ContainerFactory::SHORTHAND_NAME_FOR_MATHS)
+            actual: $byShortName
         );
+
+        return [$byInterfaceId, $byClassId, $byShortName];
+    }
+
+    /**
+     * @test
+     * @depends itCanGetMathsService
+     *
+     * @param MathsInterface[] $services
+     */
+    public function itReturnsTheSameInstanceForAllIds(
+        array $services
+    ): void {
+        [$byInterfaceId, $byClassId, $byShortName] = $services;
+        $actual                                    = ($byInterfaceId === $byClassId) && ($byInterfaceId === $byShortName);
+        self::assertTrue($actual);
     }
 
     /** @test */

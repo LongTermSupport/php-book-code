@@ -15,8 +15,8 @@ final class ServiceLocator implements ContainerInterface
     private array $idsToClassNames;
 
     // This is an array of ids to actual instances
-    /** @var array <string, object|null> */
-    private array $idsToInstances;
+    /** @var array <class-string, object|null> */
+    private array $classNamesToInstances;
 
     private ServiceFactory $serviceFactory;
 
@@ -25,7 +25,7 @@ final class ServiceLocator implements ContainerInterface
         foreach ($serviceDefinitions as $serviceDefinition) {
             $this->storeDefinition($serviceDefinition);
         }
-        $this->serviceFactory = new ServiceFactory($this->idsToClassNames);
+        $this->serviceFactory = new ServiceFactory(\array_keys($this->classNamesToInstances));
     }
 
     // this is the first of the two methods defined in the PSR ContainerInterface.
@@ -34,39 +34,35 @@ final class ServiceLocator implements ContainerInterface
     // thanks to covariance rules, we are able to add return type hints though
     public function get($id): object
     {
+        // first determine which class to use for the service ID
+        $className = $this->getClassFullyQualifiedNameForId($id);
+
         // if we already have an instance stored, we just return that
-        return $this->idsToInstances[$id]
+        return $this->classNamesToInstances[$className]
             // otherwise we create an instance and store the result
             // note, the ==? null coalesce assignment operator, assigns the value of
             // the right hand side to the left when the left is null
-            ??= $this->createInstance($id);
+            ??= $this->createInstance($className);
     }
 
     // this is the second of the two methods defined in the PSR ContainerInterface.
     public function has($id): bool
     {
-        try {
-            $this->getClassFullyQualifiedNameForId($id);
-
-            return true;
-        } catch (NotFoundExceptionInterface) {
-            return false;
-        }
+        return isset($this->idsToClassNames[$id]);
     }
 
     private function storeDefinition(ServiceDefinitionInterface $serviceDefinition): void
     {
         foreach ($serviceDefinition->getIds() as $id) {
-            $className                  = $serviceDefinition->getClassFullyQualifiedName();
-            $this->idsToClassNames[$id] = $className;
-            $this->idsToInstances[$id]  = null;
+            $className                               = $serviceDefinition->getClassFullyQualifiedName();
+            $this->idsToClassNames[$id]              = $className;
+            $this->classNamesToInstances[$className] = null;
         }
     }
 
-    private function createInstance(string $id): object
+    /** @param class-string $className */
+    private function createInstance(string $className): object
     {
-        $className = $this->getClassFullyQualifiedNameForId($id);
-
         return $this->serviceFactory->createInstance($className);
     }
 
@@ -75,11 +71,8 @@ final class ServiceLocator implements ContainerInterface
      */
     private function getClassFullyQualifiedNameForId(string $id): string
     {
-        if (\array_key_exists($id, $this->idsToClassNames)) {
-            // we return the fully qualified class name the service ID maps to
-            return $this->idsToClassNames[$id];
-        }
-        throw new class('Failed finding service class for ' . $id) extends Exception implements NotFoundExceptionInterface {
-        };
+        return $this->idsToClassNames[$id]
+               ?? throw new class('Failed finding service class for ' . $id) extends Exception implements NotFoundExceptionInterface {
+               };
     }
 }

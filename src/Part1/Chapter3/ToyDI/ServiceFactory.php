@@ -19,10 +19,10 @@ final class ServiceFactory
      */
     private array $classLookup;
 
-    /** @param array<string, class-string> $idsToClassNames */
-    public function __construct(array $idsToClassNames)
+    /** @param array<int, class-string> $classNames */
+    public function __construct(array $classNames)
     {
-        $this->buildClassLookup($idsToClassNames);
+        $this->buildClassLookup($classNames);
     }
 
     /** @param class-string $className */
@@ -36,12 +36,11 @@ final class ServiceFactory
     /**
      * This method builds up an optimised lookup array so that we can validate valid class names.
      *
-     * @param array<string, class-string> $idsToClassNames
+     * @param array<int, class-string> $classNames
      */
-    private function buildClassLookup(array $idsToClassNames): void
+    private function buildClassLookup(array $classNames): void
     {
-        $classes           = \array_values($idsToClassNames);
-        $uniqueClasses     = \array_unique($classes);
+        $uniqueClasses     = \array_unique($classNames);
         $this->classLookup = \array_fill_keys(keys: $uniqueClasses, value: true);
     }
 
