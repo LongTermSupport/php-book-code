@@ -37,7 +37,12 @@ final class ContainerTest extends TestCase
         $this->container = (new ContainerFactory())->buildAppContainer();
     }
 
-    /** @test */
+    /**
+     * A simple test to ensure we can retrieve the echo service
+     * with both the interface and class name as service ID.
+     *
+     * @test
+     */
     public function itCanGetEchoService(): void
     {
         self::assertInstanceOf(
@@ -51,6 +56,12 @@ final class ContainerTest extends TestCase
     }
 
     /**
+     * Another test to ensure we can retrieve the service.
+     * for this service we also have a "short" service ID which is just an arbitrary string
+     * Note that this test returns an array.
+     * This resulting array is used as input on the itReturnsTheSameInstance test
+     * which has defined this test as a dependency.
+     *
      * @test
      *
      * @return MathsInterface[]
@@ -77,6 +88,9 @@ final class ContainerTest extends TestCase
     }
 
     /**
+     * Here we have a test that uses values returned from other tests in order to do further checks
+     * This is a nice way of keeping tests DRY and also splitting test concerns for extra clarity.
+     *
      * @test
      * @depends itCanGetMathsService
      * @depends itCanBuildServicesWithDependencies
@@ -87,11 +101,19 @@ final class ContainerTest extends TestCase
         array $services
     ): void {
         [$serviceOne, $serviceTwo, $serviceThree] = $services;
-        $actual                                   = ($serviceOne === $serviceTwo) && ($serviceOne === $serviceThree);
+        $actual                                   = (
+            ($serviceOne === $serviceTwo) && ($serviceOne === $serviceThree)
+        );
         self::assertTrue($actual);
     }
 
     /**
+     * Here we have another test retrieving services.
+     * This time we are testing a deliberately multi dimensional dependency graph
+     * that also includes a "Ubiquitous Service" that is required at every level.
+     * We return all instances of the Ubiquitous service so that
+     * it can be checked in the itReturnsTheSameInstance test.
+     *
      * @test
      *
      * @return UbiquitousService[]
@@ -118,6 +140,9 @@ final class ContainerTest extends TestCase
     }
 
     /**
+     * this is a data provider, providing values to be used
+     * in the hasReturnsTrueForValidServiceIds test.
+     *
      * @dataProvider
      *
      * @return Generator<string, array<int,string>>
@@ -132,6 +157,9 @@ final class ContainerTest extends TestCase
     }
 
     /**
+     * this tests that the call to `has` returns true. We test multiple values
+     * by utilising the dataProvider method provideValidServiceIds.
+     *
      * @dataProvider provideValidServiceIds
      * @test
      */
@@ -142,6 +170,9 @@ final class ContainerTest extends TestCase
     }
 
     /**
+     * this is a another data provider, providing values to be used
+     * in the hasReturnsFalseForInvalidServiceIds test.
+     *
      * @dataProvider
      *
      * @return Generator<string, array<int,string>>
@@ -154,6 +185,9 @@ final class ContainerTest extends TestCase
     }
 
     /**
+     * this tests that the call to `has` returns false. We test multiple values
+     * by utilising the dataProvider method provideInvalidServiceIds.
+     *
      * @dataProvider provideInvalidServiceIds
      * @test
      */

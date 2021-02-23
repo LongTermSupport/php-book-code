@@ -55,9 +55,7 @@ final class ServiceLocator implements ContainerInterface
         }
     }
 
-    /**
-     * @return class-string
-     */
+    /** @return class-string */
     private function getClassFullyQualifiedNameForId(string $id): string
     {
         return $this->idsToClassNames[$id]
