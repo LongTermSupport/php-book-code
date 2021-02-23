@@ -37,9 +37,9 @@ final class HomePageControllerTest extends TestCase
                 )
             )
         ;
-        ob_start();
+        \ob_start();
         $response->send();
-        $actual = (string)ob_get_clean();
+        $actual = (string)\ob_get_clean();
         self::assertStringContainsString('</html>', $actual);
     }
 }

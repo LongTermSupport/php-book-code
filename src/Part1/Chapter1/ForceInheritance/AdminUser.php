@@ -18,7 +18,7 @@ final class AdminUser extends AbstractUser
         AdminPermission ...$permissions
     ) {
         parent::__construct($id, $name);
-        array_map(
+        \array_map(
             callback: function (AdminPermission $perm): void {
                 $this->permissions[$perm->getPermName()] = $perm;
             },
@@ -29,9 +29,9 @@ final class AdminUser extends AbstractUser
     public function __toString(): string
     {
         return "\n\nadmin user {$this->name} ({$this->id}) has these permissions: \n" .
-               implode(
+               \implode(
                    "\n",
-                   array_map(
+                   \array_map(
                        callback: static function (AdminPermission $perm): string {
                            return $perm->getPermName() . ': ' . ($perm->isAllowed() ? 'true' : 'false');
                        },

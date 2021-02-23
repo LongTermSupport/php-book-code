@@ -22,6 +22,6 @@ final class Cloner
     /** The actual ID for the unique object instance */
     public function getObjectId(): int
     {
-        return spl_object_id($this);
+        return \spl_object_id($this);
     }
 }

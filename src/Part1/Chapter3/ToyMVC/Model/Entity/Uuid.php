@@ -32,15 +32,15 @@ final class Uuid implements Stringable
 
     public static function create(): self
     {
-        $hex    = bin2hex(random_bytes(16));
-        $chunks = str_split($hex, 4);
+        $hex    = \bin2hex(\random_bytes(16));
+        $chunks = \str_split($hex, 4);
 
-        $uuidString = sprintf(
+        $uuidString = \sprintf(
             '%08s-%04s-' . self::VERSION . '%03s-%04x-%012s',
             $chunks[0] . $chunks[1],
             $chunks[2],
-            substr($chunks[3], 1, 3),
-            hexdec($chunks[4]) & 0x3fff | 0x8000,
+            \substr($chunks[3], 1, 3),
+            \hexdec($chunks[4]) & 0x3fff | 0x8000,
             $chunks[5] . $chunks[6] . $chunks[7]
         );
 
@@ -49,7 +49,7 @@ final class Uuid implements Stringable
 
     public static function createFromUri(string $uri, string $pattern): self
     {
-        if (preg_match($pattern, $uri, $matchGroups) !== 1) {
+        if (\preg_match($pattern, $uri, $matchGroups) !== 1) {
             throw new RuntimeException('Failed matching uri ' . $uri . ' with pattern ' . $pattern);
         }
         $id = $matchGroups[self::ROUTE_MATCH_KEY]
@@ -65,6 +65,6 @@ final class Uuid implements Stringable
 
     private function isValid(string $uuid): bool
     {
-        return preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di', $uuid) === 1;
+        return \preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di', $uuid) === 1;
     }
 }

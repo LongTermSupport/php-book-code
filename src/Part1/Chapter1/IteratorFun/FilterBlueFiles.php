@@ -18,7 +18,7 @@ final class FilterBlueFiles
     {
         $filterIterator = $this->getIterator($config);
 
-        return iterator_to_array($filterIterator);
+        return \iterator_to_array($filterIterator);
     }
 
     /** @return FilterIterator */
@@ -40,7 +40,7 @@ final class FilterBlueFiles
 
             private function isBlue(string $filename): bool
             {
-                return str_contains(haystack: $filename, needle: FilterBlueFiles::FILTER_MATCH);
+                return \str_contains(haystack: $filename, needle: FilterBlueFiles::FILTER_MATCH);
             }
         };
     }

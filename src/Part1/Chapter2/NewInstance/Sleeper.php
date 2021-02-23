@@ -48,7 +48,7 @@ final class Sleeper
 
     private function openResource(): void
     {
-        $fp = fopen(__FILE__, 'rb');
+        $fp = \fopen(__FILE__, 'rb');
         if ($fp === false) {
             throw new RuntimeException('Failed opening file');
         }

@@ -35,6 +35,6 @@ final class Route
 
     private function matchesRoutePattern(RequestData $requestData): bool
     {
-        return preg_match($this->routePattern, $requestData->getUri()) === 1;
+        return \preg_match($this->routePattern, $requestData->getUri()) === 1;
     }
 }

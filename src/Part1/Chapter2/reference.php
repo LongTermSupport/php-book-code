@@ -17,7 +17,7 @@ echo "\nAnd now \$a is {$a}";
 $instance = new class() {
     public function __toString(): string
     {
-        return (string)spl_object_id($this);
+        return (string)\spl_object_id($this);
     }
 };
 echo "\n\$instance ID: {$instance}";

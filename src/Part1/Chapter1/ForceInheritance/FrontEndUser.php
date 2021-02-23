@@ -24,6 +24,6 @@ final class FrontEndUser extends AbstractUser
     public function __toString(): string
     {
         return "front end user {$this->name} ({$this->id}) has recently viewed: " .
-               print_r($this->recentlyViewedPages, true);
+               \print_r($this->recentlyViewedPages, true);
     }
 }

@@ -22,8 +22,8 @@ require __DIR__ . '/../../../vendor/autoload.php';
 echo "\nGetting new instance of YeOldeClass";
 $yeOlde = new YeOldeClass([1, 2, 3], new stdClass(), '1', 123, 'yes');
 
-echo "\nYeOlde number is a " . gettype($yeOlde->getANumber()) .
-     ' with a value of ' . var_export($yeOlde->getANumber(), true);
+echo "\nYeOlde number is a " . \gettype($yeOlde->getANumber()) .
+     ' with a value of ' . \var_export($yeOlde->getANumber(), true);
 
 /*
  * I can't get past the defensive class, though
@@ -39,8 +39,8 @@ try {
  */
 echo "\nNow trying to get an instance of YeOldeDefensiveClass being sneaky and using reflection";
 $yeOldeDefensive = (new ReflectionClass(YeOldeDefensive::class))->newInstanceWithoutConstructor();
-echo "\nYeOldeDefensive number is a " . gettype($yeOldeDefensive->getANumber()) .
-     ' with a value of ' . var_export($yeOldeDefensive->getANumber(), true);
+echo "\nYeOldeDefensive number is a " . \gettype($yeOldeDefensive->getANumber()) .
+     ' with a value of ' . \var_export($yeOldeDefensive->getANumber(), true);
 
 /*
  * Now the same class in modern PHP, there are lots of barriers to even the most determined user stabbing themselves
@@ -56,8 +56,8 @@ try {
 echo "\n\nNow trying to get an instance of ModernClass being sneaky and using reflection";
 $modern = (new ReflectionClass(ModernClass::class))->newInstanceWithoutConstructor();
 try {
-    echo "\nModern number is a " . gettype($modern->getANumber()) .
-         ' with a value of ' . var_export($modern->getANumber(), true);
+    echo "\nModern number is a " . \gettype($modern->getANumber()) .
+         ' with a value of ' . \var_export($modern->getANumber(), true);
 } catch (Throwable $throwable) {
     echo "\nAnd failed, got an instance of " . $throwable::class .
          " with an error message:\n {$throwable->getMessage()}";

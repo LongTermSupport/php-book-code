@@ -15,6 +15,6 @@ trait CurrentIsFileInfoTrait
         if ($current instanceof SplFileInfo) {
             return $current;
         }
-        throw new RuntimeException('unexpected current value ' . var_export($current, true));
+        throw new RuntimeException('unexpected current value ' . \var_export($current, true));
     }
 }

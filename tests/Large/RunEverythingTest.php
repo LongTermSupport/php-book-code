@@ -59,7 +59,7 @@ final class RunEverythingTest extends TestCase
      */
     public function provideFilesToRun(): array
     {
-        return iterator_to_array($this->filesToRunIterator());
+        return \iterator_to_array($this->filesToRunIterator());
     }
 
     /**
@@ -67,12 +67,12 @@ final class RunEverythingTest extends TestCase
      */
     private function runCode(string $codeRealPath): array
     {
-        exec(
+        \exec(
             command: self::DISABLE_XDEBUG . ' && php -f ' . $codeRealPath . self::REDIRECT_ERR,
             output: $output,
             result_code: $exitCode
         );
-        $output = trim(implode("\n", $output));
+        $output = \trim(\implode("\n", $output));
 
         return [$exitCode, $output];
     }
@@ -91,7 +91,7 @@ final class RunEverythingTest extends TestCase
                 $current = $this->current();
                 $path    = (string)$current->getRealPath();
 
-                return preg_match(self::ACCEPT_REGEXP, $path) === 1;
+                return \preg_match(self::ACCEPT_REGEXP, $path) === 1;
             }
         };
         foreach ($iterator as $file) {

@@ -12,9 +12,9 @@ final class ResponseHeader
 
     public function send(): void
     {
-        if (headers_sent()) {
+        if (\headers_sent()) {
             return;
         }
-        header($this->header, true, $this->code);
+        \header($this->header, true, $this->code);
     }
 }

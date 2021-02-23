@@ -97,9 +97,9 @@ final class FakeDataForToy
     {
         $postsToMerge = [];
         foreach ($this->categoryEntities as $categoryEntity) {
-            $postsToMerge[] = iterator_to_array($categoryEntity->getPostCollection());
+            $postsToMerge[] = \iterator_to_array($categoryEntity->getPostCollection());
         }
 
-        return array_merge(...$postsToMerge);
+        return \array_merge(...$postsToMerge);
     }
 }

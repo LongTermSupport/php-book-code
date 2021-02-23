@@ -24,7 +24,7 @@ final class CategoryCollection implements Iterator, Countable
 
     public function next(): bool | CategoryEntity
     {
-        return next($this->categoryEntities);
+        return \next($this->categoryEntities);
     }
 
     /**
@@ -38,7 +38,7 @@ final class CategoryCollection implements Iterator, Countable
 
     public function current(): CategoryEntity
     {
-        $current = current($this->categoryEntities);
+        $current = \current($this->categoryEntities);
 
         return $current instanceof CategoryEntity
             ? $current
@@ -47,16 +47,16 @@ final class CategoryCollection implements Iterator, Countable
 
     public function valid(): bool
     {
-        return key($this->categoryEntities) !== null;
+        return \key($this->categoryEntities) !== null;
     }
 
     public function rewind(): void
     {
-        reset($this->categoryEntities);
+        \reset($this->categoryEntities);
     }
 
     public function count(): int
     {
-        return count($this->categoryEntities);
+        return \count($this->categoryEntities);
     }
 }

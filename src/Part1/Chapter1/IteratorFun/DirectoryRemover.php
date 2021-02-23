@@ -19,7 +19,7 @@ final class DirectoryRemover
 {
     public function removeDir(string $path): void
     {
-        if (!is_dir($path)) {
+        if (!\is_dir($path)) {
             return;
         }
         $traversable = $this->getIterator($path);
@@ -34,10 +34,10 @@ final class DirectoryRemover
                 // at this point, we start to recurse
                 $this->removeDir($item->getPathname());
                 // then the directory is empty and we can remove it
-                rmdir($item->getPathname());
+                \rmdir($item->getPathname());
             }
             if ($item->isFile()) {
-                unlink($item->getPathname());
+                \unlink($item->getPathname());
             }
         }
     }

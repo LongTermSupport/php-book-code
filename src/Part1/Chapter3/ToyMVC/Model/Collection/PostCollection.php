@@ -24,7 +24,7 @@ final class PostCollection implements Iterator, Countable
 
     public function next(): bool | PostEntity
     {
-        return next($this->postEntities);
+        return \next($this->postEntities);
     }
 
     /**
@@ -38,7 +38,7 @@ final class PostCollection implements Iterator, Countable
 
     public function current(): PostEntity
     {
-        $current = current($this->postEntities);
+        $current = \current($this->postEntities);
 
         return $current instanceof PostEntity
             ? $current
@@ -47,16 +47,16 @@ final class PostCollection implements Iterator, Countable
 
     public function valid(): bool
     {
-        return key($this->postEntities) !== null;
+        return \key($this->postEntities) !== null;
     }
 
     public function rewind(): void
     {
-        reset($this->postEntities);
+        \reset($this->postEntities);
     }
 
     public function count(): int
     {
-        return count($this->postEntities);
+        return \count($this->postEntities);
     }
 }

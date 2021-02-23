@@ -25,7 +25,7 @@ final class ServiceLocator implements ContainerInterface
         foreach ($serviceDefinitions as $serviceDefinition) {
             $this->storeDefinition($serviceDefinition);
         }
-        $this->serviceFactory = new ServiceFactory(array_values(array_unique($this->idsToClassNames)));
+        $this->serviceFactory = new ServiceFactory($this->idsToClassNames);
     }
 
     // this is the first of the two methods defined in the PSR ContainerInterface.
@@ -75,7 +75,7 @@ final class ServiceLocator implements ContainerInterface
      */
     private function getClassFullyQualifiedNameForId(string $id): string
     {
-        if (array_key_exists($id, $this->idsToClassNames)) {
+        if (\array_key_exists($id, $this->idsToClassNames)) {
             // we return the fully qualified class name the service ID maps to
             return $this->idsToClassNames[$id];
         }

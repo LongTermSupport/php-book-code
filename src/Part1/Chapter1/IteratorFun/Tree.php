@@ -24,6 +24,6 @@ final class Tree
 
     private function removePath(string $pathToRemove, string $line): string
     {
-        return str_replace(search: $pathToRemove, replace: '', subject: $line);
+        return \str_replace(search: $pathToRemove, replace: '', subject: $line);
     }
 }

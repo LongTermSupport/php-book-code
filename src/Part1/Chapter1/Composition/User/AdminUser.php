@@ -15,7 +15,7 @@ final class AdminUser implements UserInterface
         private UserData $userData,
         AdminPermissionInterface ...$permissions
     ) {
-        array_map(
+        \array_map(
             callback: function (AdminPermissionInterface $perm): void {
                 $this->permissions[$perm->getPermName()] = $perm;
             },
@@ -26,9 +26,9 @@ final class AdminUser implements UserInterface
     public function __toString(): string
     {
         return "\n\nadmin user {$this->userData->getName()} ({$this->userData->getId()}) has these permissions: \n" .
-               implode(
+               \implode(
                    "\n",
-                   array_map(
+                   \array_map(
                        callback: static function (AdminPermissionInterface $perm): string {
                            return $perm->getPermName() . ': ' . ($perm->allowed() ? 'true' : 'false');
                        },

@@ -14,10 +14,10 @@ How much bandwidth do you have get six alpha pups in here for a focus group no s
 ";
 
 // true
-$stringContains = str_contains(haystack: $officeWisdom, needle: 'active');
+$stringContains = \str_contains(haystack: $officeWisdom, needle: 'active');
 
 // false, because this is case sensitive
-$stringStartWith = str_starts_with(haystack: $officeWisdom, needle: 'how');
+$stringStartWith = \str_starts_with(haystack: $officeWisdom, needle: 'how');
 
 // true
-$stringEndsWith = str_ends_with(haystack: $officeWisdom, needle: 'focus group.');
+$stringEndsWith = \str_ends_with(haystack: $officeWisdom, needle: 'focus group.');

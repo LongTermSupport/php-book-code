@@ -53,10 +53,10 @@ final class FileCreator
     private function makeDir(string $path): void
     {
         if (
-            !mkdir($path, 0777, true)
-            && !is_dir($path)
+            !\mkdir($path, 0777, true)
+            && !\is_dir($path)
         ) {
-            throw new RuntimeException(sprintf('Directory "%s" was not created', $path));
+            throw new RuntimeException(\sprintf('Directory "%s" was not created', $path));
         }
     }
 
@@ -100,7 +100,7 @@ final class FileCreator
      */
     private function valid(SplFileInfo $fileInfo, Config $config): bool
     {
-        return str_starts_with(haystack: $fileInfo->getPathname(), needle: $config->getBaseDir())
+        return \str_starts_with(haystack: $fileInfo->getPathname(), needle: $config->getBaseDir())
                && $fileInfo->isDir() === true;
     }
 
@@ -113,7 +113,7 @@ final class FileCreator
         $path   = $fileInfo->getPathname();
         $prefix = ($this->toggle = !$this->toggle) ? 'blue_' : 'green_';
 
-        $filename = tempnam($path, $prefix);
+        $filename = \tempnam($path, $prefix);
         if ($filename === false) {
             throw new RuntimeException('Failed creating file at ' . $path);
         }

@@ -14,8 +14,8 @@ use RuntimeException;
 require __DIR__ . '/../../../vendor/autoload.php';
 
 const TMP_DIR = __DIR__ . '/../../../var/';
-if (!is_dir(TMP_DIR) && mkdir(TMP_DIR, 0777, true) && !is_dir(TMP_DIR)) {
-    throw new RuntimeException(sprintf('Directory "%s" was not created', TMP_DIR));
+if (!\is_dir(TMP_DIR) && \mkdir(TMP_DIR, 0777, true) && !\is_dir(TMP_DIR)) {
+    throw new RuntimeException(\sprintf('Directory "%s" was not created', TMP_DIR));
 }
 
 $config = new Config(TMP_DIR . '/iterator-fun', 'foo/bar/baz', 'doo/dar/daz');

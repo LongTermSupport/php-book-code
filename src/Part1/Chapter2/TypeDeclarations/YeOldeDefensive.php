@@ -33,17 +33,17 @@ final class YeOldeDefensive
     public function __construct(array $anArray, stdClass $anObject, $aNumber, $aString, $aBool = true)
     {
         $errors = [];
-        if (false === (is_int($aNumber) || is_float($aNumber))) {
+        if (false === (\is_int($aNumber) || \is_float($aNumber))) {
             $errors[] = 'invalid $aNumber ' . $aNumber . ', must be an int or a float';
         }
-        if (is_string($aString) === false) {
+        if (\is_string($aString) === false) {
             $errors[] = 'invalid $aString ' . $aString . ', must be a string';
         }
-        if (is_bool($aBool) === false) {
+        if (\is_bool($aBool) === false) {
             $errors[] = 'invalid $aBool ' . $aBool . ', must be a bool';
         }
         if ($errors !== []) {
-            throw new RuntimeException('Errors in constructor params: ' . print_r($errors, true));
+            throw new RuntimeException('Errors in constructor params: ' . \print_r($errors, true));
         }
         $this->anArray  = $anArray;
         $this->anObject = $anObject;

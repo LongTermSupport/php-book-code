@@ -17,6 +17,6 @@ final class FrontEndUser implements UserInterface
     public function __toString(): string
     {
         return "front end user {$this->userData->getName()} ({$this->userData->getId()}) has recently viewed: " .
-               print_r($this->recentlyViewedPages->getUrls(), true);
+               \print_r($this->recentlyViewedPages->getUrls(), true);
     }
 }

@@ -12,9 +12,17 @@ use RuntimeException;
 
 final class ServiceFactory
 {
-    /** @param array<int, class-string> $serviceClassNames */
-    public function __construct(private array $serviceClassNames)
+    /**
+     * A fast lookup array for validating class names.
+     *
+     * @var array<class-string, bool>
+     */
+    private array $classLookup;
+
+    /** @param array<string, class-string> $idsToClassNames */
+    public function __construct(array $idsToClassNames)
     {
+        $this->buildClassLookup($idsToClassNames);
     }
 
     /** @param class-string $className */
@@ -25,9 +33,21 @@ final class ServiceFactory
         return new $className(...$this->getDependencyInstances($className));
     }
 
+    /**
+     * This method builds up an optimised lookup array so that we can validate valid class names.
+     *
+     * @param array<string, class-string> $idsToClassNames
+     */
+    private function buildClassLookup(array $idsToClassNames): void
+    {
+        $classes           = \array_values($idsToClassNames);
+        $uniqueClasses     = \array_unique($classes);
+        $this->classLookup = \array_fill_keys(keys: $uniqueClasses, value: true);
+    }
+
     private function assertServiceClassName(string $className): void
     {
-        if (in_array($className, $this->serviceClassNames, strict: true) === true) {
+        if (isset($this->classLookup[$className])) {
             return;
         }
         throw new RuntimeException(

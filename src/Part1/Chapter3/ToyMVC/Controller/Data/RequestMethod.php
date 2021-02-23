@@ -18,7 +18,7 @@ final class RequestMethod
     public function __construct(private string $name)
     {
         self::assertIsValidName($name);
-        $this->name = strtoupper($this->name);
+        $this->name = \strtoupper($this->name);
     }
 
     public static function assertIsValidName(string $name): void
@@ -27,7 +27,7 @@ final class RequestMethod
             return;
         }
         throw new InvalidArgumentException(
-            'Invalid method ' . $name . ', must be one of: ' . print_r(
+            'Invalid method ' . $name . ', must be one of: ' . \print_r(
                 self::METHODS,
                 true
             )

@@ -9,7 +9,7 @@ $untyped = new class() {
 };
 
 echo "\nYou can access untyped properties and the value is: " .
-     var_export($untyped->uninitialised, true);
+     \var_export($untyped->uninitialised, true);
 
 $typed = new class() {
     public string $uninitialised;

@@ -8,6 +8,6 @@ final class Esc
 {
     public static function _(string $input): string
     {
-        return htmlspecialchars(string: $input, flags: ENT_QUOTES);
+        return \htmlspecialchars(string: $input, flags: ENT_QUOTES);
     }
 }

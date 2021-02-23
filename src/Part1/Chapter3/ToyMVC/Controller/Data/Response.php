@@ -16,7 +16,7 @@ final class Response
 
     public function send(): void
     {
-        array_map(static fn (ResponseHeader $header) => $header->send(), $this->headers);
+        \array_map(static fn (ResponseHeader $header) => $header->send(), $this->headers);
         echo $this->responseBody;
     }
 }

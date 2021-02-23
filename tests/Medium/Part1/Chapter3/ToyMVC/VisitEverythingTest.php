@@ -31,7 +31,7 @@ final class VisitEverythingTest extends TestCase
     {
         $homePage = $this->visit('/');
 
-        preg_match_all('%href="(?<uri>[^"]+)"%', $homePage, $matches);
+        \preg_match_all('%href="(?<uri>[^"]+)"%', $homePage, $matches);
 
         foreach ($matches['uri'] as $uri) {
             $this->visit($uri);
@@ -42,7 +42,7 @@ final class VisitEverythingTest extends TestCase
 
     private function assertLoaded(string $page): void
     {
-        self::assertStringEndsWith('</html>', trim($page));
+        self::assertStringEndsWith('</html>', \trim($page));
     }
 
     private function visit(string $uri): string

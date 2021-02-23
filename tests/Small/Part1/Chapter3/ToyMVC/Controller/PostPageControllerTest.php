@@ -27,7 +27,7 @@ final class PostPageControllerTest extends TestCase
 
     public function setUp(): void
     {
-        $postEntity = current(FakeDataForToy::singleton()->getPostEntities());
+        $postEntity = \current(FakeDataForToy::singleton()->getPostEntities());
         if ($postEntity === false) {
             throw new RuntimeException('failed getting post entity');
         }
@@ -41,9 +41,9 @@ final class PostPageControllerTest extends TestCase
         $uri         = $this->getUri();
         $requestData = new RequestData($uri, new RequestMethod(RequestMethod::METHOD_GET));
         $response    = $this->controller->getResponse($requestData);
-        ob_start();
+        \ob_start();
         $response->send();
-        $actual = (string)ob_get_clean();
+        $actual = (string)\ob_get_clean();
         self::assertStringContainsString('</html>', $actual);
     }
 

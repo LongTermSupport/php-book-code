@@ -18,10 +18,10 @@ final class TemplateRenderer
      */
     public function renderTemplate(string $templateName, TemplateDataInterface $templateData): string
     {
-        ob_start();
-        require __DIR__ . '/Template/' . basename($templateName);
+        \ob_start();
+        require __DIR__ . '/Template/' . \basename($templateName);
 
-        $html = ob_get_clean();
+        $html = \ob_get_clean();
         if ($html === false) {
             throw new RuntimeException('failed getting output');
         }

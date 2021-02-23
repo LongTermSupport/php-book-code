@@ -19,11 +19,11 @@ final class BrowserVisit
     public function visit(string $uri): string
     {
         $this->setSuperGlobals($uri);
-        ob_start();
+        \ob_start();
 
         $this->frontController->handleRequest();
 
-        return (string)ob_get_clean();
+        return (string)\ob_get_clean();
     }
 
     private function setSuperGlobals(string $uri): void

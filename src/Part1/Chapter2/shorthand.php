@@ -29,7 +29,7 @@ if ($object->bool1 === true) {
 // You can make ternary strict by checking for identity (===) with true/false directly
 $value2 = $object->bool1 === true ? 'bool 1 is true' : 'bool 1 is false';
 
-echo "\n" . '$value1===$value2? ' . var_export($value1 === $value2, true);
+echo "\n" . '$value1===$value2? ' . \var_export($value1 === $value2, true);
 
 // classic null checking monstrosity (deliberately verbose)
 if ($object->property2 === null) {
@@ -53,4 +53,4 @@ if ($object->property2 === null) {
 // null coalesce & nullsafe operator
 $value4 = $object->property2?->foo ?? $object->property1?->foo;
 
-echo "\n" . '$value3===$value4? ' . var_export($value3 === $value4, true);
+echo "\n" . '$value3===$value4? ' . \var_export($value3 === $value4, true);

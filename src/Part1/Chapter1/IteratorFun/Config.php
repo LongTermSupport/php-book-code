@@ -12,7 +12,7 @@ final class Config
     public function __construct(private string $baseDir, string ...$subDirs)
     {
         foreach ($subDirs as $subDir) {
-            if (str_starts_with(haystack: $subDir, needle: $this->baseDir) === false) {
+            if (\str_starts_with(haystack: $subDir, needle: $this->baseDir) === false) {
                 $subDir = "{$this->baseDir}/{$subDir}";
             }
             $this->subDirs[] = $subDir;
