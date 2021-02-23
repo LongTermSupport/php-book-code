@@ -9,6 +9,7 @@ use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelOneService;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeDep;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeService;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelTwoService;
+use Book\Part1\Chapter3\ToyDI\Service\DepTree\UbiquitousService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoBarService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoFooService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoStuffInterface;
@@ -78,19 +79,24 @@ final class ContainerTest extends TestCase
     /**
      * @test
      * @depends itCanGetMathsService
+     * @depends itCanBuildServicesWithDependencies
      *
-     * @param MathsInterface[] $services
+     * @param object[] $services
      */
-    public function itReturnsTheSameInstanceForAllIds(
+    public function itReturnsTheSameInstance(
         array $services
     ): void {
-        [$byInterfaceId, $byClassId, $byShortName] = $services;
-        $actual                                    = ($byInterfaceId === $byClassId) && ($byInterfaceId === $byShortName);
+        [$serviceOne, $serviceTwo, $serviceThree] = $services;
+        $actual                                   = ($serviceOne === $serviceTwo) && ($serviceOne === $serviceThree);
         self::assertTrue($actual);
     }
 
-    /** @test */
-    public function itCanBuildServicesWithDependencies(): void
+    /**
+     * @test
+     *
+     * @return UbiquitousService[]
+     */
+    public function itCanBuildServicesWithDependencies(): array
     {
         /** @var LevelOneService $levelOneService */
         $levelOneService = $this->container->get(LevelOneService::class);
@@ -103,6 +109,12 @@ final class ContainerTest extends TestCase
             expected: LevelThreeDep::class,
             actual: $levelThreeDep
         );
+
+        return [
+            $levelOneService->ubiquitousService,
+            $levelOneService->levelTwoService->ubiquitousService,
+            $levelOneService->levelTwoService->levelThreeService->ubiquitousService,
+        ];
     }
 
     /**

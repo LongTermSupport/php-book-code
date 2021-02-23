@@ -10,6 +10,7 @@ use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeDep;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeService;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelTwoDep;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelTwoService;
+use Book\Part1\Chapter3\ToyDI\Service\DepTree\UbiquitousService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoBarService;
 use Book\Part1\Chapter3\ToyDI\Service\EchoStuff\EchoStuffInterface;
 use Book\Part1\Chapter3\ToyDI\Service\MathsStuff\AdditionService;
@@ -17,8 +18,12 @@ use Book\Part1\Chapter3\ToyDI\Service\MathsStuff\MathsInterface;
 
 final class ContainerFactory
 {
-    public const SHORTHAND_NAME_FOR_MATHS  = 'maths';
-    private const SERVICE_CLASSES_TO_IDS   = [
+    public const SHORTHAND_NAME_FOR_MATHS = 'maths';
+
+    /**
+     * @var array<class-string,array<int,string>>
+     */
+    private const SERVICE_CLASSES_TO_IDS = [
         AdditionService::class   => [
             MathsInterface::class,
             AdditionService::class,
@@ -34,6 +39,7 @@ final class ContainerFactory
         LevelTwoDep::class       => [LevelTwoDep::class],
         LevelThreeService::class => [LevelThreeService::class],
         LevelThreeDep::class     => [LevelThreeDep::class],
+        UbiquitousService::class => [UbiquitousService::class],
     ];
 
     public function buildAppContainer(): ServiceLocator

@@ -48,3 +48,6 @@ parameters:
         -
             message: '#tCanGetMathsService\(\) should return .+? but returns array<int, object>#'
             path: ./../tests/Small/Part1/Chapter3/ToyDI/ContainerTest.php
+        -
+            message: '#Parameter \#2 \$className of method .+?getSimpleDefinition\(\) expects class-string, string#'
+            path: ./../src/Part1/Chapter3/ToyDI/ContainerFactory.php

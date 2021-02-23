@@ -12,46 +12,45 @@ use RuntimeException;
 
 final class ServiceFactory
 {
-    /**
-     * A fast lookup array for validating class names.
-     *
-     * @var array<class-string, bool>
-     */
-    private array $classLookup;
+    // This is an array of class names to actual instances of that class.
+    // This allows us to ensure we keep only one instance of a given class
+    /** @var array <class-string, object|null> */
+    private array $classNamesToInstances;
 
-    /** @param array<int, class-string> $classNames */
-    public function __construct(array $classNames)
+    public function __construct(private ServiceLocator $serviceLocator)
     {
-        $this->buildClassLookup($classNames);
+        $this->buildClassNamesToInstances();
     }
 
     /** @param class-string $className */
-    public function createInstance(string $className): object
+    public function getInstance(string $className): object
     {
         $this->assertServiceClassName($className);
 
-        return new $className(...$this->getDependencyInstances($className));
+        // if we already have an instance stored, we just return that
+        return $this->classNamesToInstances[$className]
+            // otherwise we create an instance and store the result
+            // note, the ==? null coalesce assignment operator, assigns the value of
+            // the right hand side to the left when the left is null
+            ??= new $className(...$this->getDependencyInstances($className));
     }
 
-    /**
-     * This method builds up an optimised lookup array so that we can validate valid class names.
-     *
-     * @param array<int, class-string> $classNames
-     */
-    private function buildClassLookup(array $classNames): void
+    private function buildClassNamesToInstances(): void
     {
-        $uniqueClasses     = \array_unique($classNames);
-        $this->classLookup = \array_fill_keys(keys: $uniqueClasses, value: true);
+        foreach ($this->serviceLocator->getIdsToClassNames() as $className) {
+            // We build an array with the key as class name and value as null,
+            // ready to be replaced with an instance of the class on demand.
+            // Note that this implicitly de-duplicates classes that are defined with multiple IDs
+            $this->classNamesToInstances[$className] = null;
+        }
     }
 
     private function assertServiceClassName(string $className): void
     {
-        if (isset($this->classLookup[$className])) {
+        if (\array_key_exists(key: $className, array: $this->classNamesToInstances)) {
             return;
         }
-        throw new RuntimeException(
-            'Class ' . $className . ' is not defined as a service'
-        );
+        throw new NotFoundException('Class ' . $className . ' is not defined as a service');
     }
 
     /**
@@ -69,7 +68,7 @@ final class ServiceFactory
             throw new InvalidArgumentException("{$className} does not have a constructor");
         }
         foreach ($constructor->getParameters() as $reflectionParameter) {
-            $return[] = $this->createInstance($this->getServiceClassString($reflectionParameter));
+            $return[] = $this->getInstance($this->getServiceClassString($reflectionParameter));
         }
 
         return $return;
