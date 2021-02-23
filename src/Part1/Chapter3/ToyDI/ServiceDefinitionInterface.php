@@ -6,7 +6,7 @@ namespace Book\Part1\Chapter3\ToyDI;
 
 interface ServiceDefinitionInterface
 {
-    /** @return array<int, class-string> */
+    /** @return array<int, string> */
     public function getIds(): array;
 
     /** @return class-string */

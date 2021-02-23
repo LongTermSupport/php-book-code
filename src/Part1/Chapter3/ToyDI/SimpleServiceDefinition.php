@@ -7,19 +7,19 @@ namespace Book\Part1\Chapter3\ToyDI;
 class SimpleServiceDefinition implements ServiceDefinitionInterface
 {
     /**
-     * @param class-string $id
-     * @param class-string $className
+     * @param array<int,string> $ids
+     * @param class-string      $className
      */
     public function __construct(
-        private string $id,
+        private array $ids,
         private string $className
     ) {
     }
 
-    /** @return array<int,class-string> */
+    /** @return array<int,string> */
     public function getIds(): array
     {
-        return [$this->id];
+        return $this->ids;
     }
 
     /** @return class-string */

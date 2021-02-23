@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Tests\Small\Part1\Chapter3\ToyDI;
 
-use Book\Part1\Chapter3\ToyDI\AppContainerFactory;
+use Book\Part1\Chapter3\ToyDI\ContainerFactory;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelOneService;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeDep;
 use Book\Part1\Chapter3\ToyDI\Service\DepTree\LevelThreeService;
@@ -32,29 +32,53 @@ final class ContainerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->container = (new AppContainerFactory())->buildAppContainer();
+        $this->container = (new ContainerFactory())->buildAppContainer();
     }
 
     /** @test */
     public function itCanGetEchoService(): void
     {
-        self::assertInstanceOf(EchoBarService::class, $this->container->get(EchoStuffInterface::class));
+        self::assertInstanceOf(
+            expected: EchoBarService::class,
+            actual: $this->container->get(EchoStuffInterface::class)
+        );
+        self::assertInstanceOf(
+            expected: EchoBarService::class,
+            actual: $this->container->get(EchoBarService::class)
+        );
     }
 
     /** @test */
     public function itCanGetMathsService(): void
     {
-        self::assertInstanceOf(AdditionService::class, $this->container->get(MathsInterface::class));
+        self::assertInstanceOf(
+            expected: AdditionService::class,
+            actual: $this->container->get(MathsInterface::class)
+        );
+        self::assertInstanceOf(
+            expected: AdditionService::class,
+            actual: $this->container->get(AdditionService::class)
+        );
+        self::assertInstanceOf(
+            expected: AdditionService::class,
+            actual: $this->container->get(ContainerFactory::SHORTHAND_NAME_FOR_MATHS)
+        );
     }
 
     /** @test */
     public function itCanBuildServicesWithDependencies(): void
     {
-        /** @var LevelOneService $level */
-        $level = $this->container->get(LevelOneService::class);
-        self::assertInstanceOf(LevelOneService::class, $level);
-        $levelThreeDep = $level->levelTwoService->levelThreeService->levelThreeDep;
-        self::assertInstanceOf(LevelThreeDep::class, $levelThreeDep);
+        /** @var LevelOneService $levelOneService */
+        $levelOneService = $this->container->get(LevelOneService::class);
+        self::assertInstanceOf(
+            expected: LevelOneService::class,
+            actual: $levelOneService
+        );
+        $levelThreeDep = $levelOneService->levelTwoService->levelThreeService->levelThreeDep;
+        self::assertInstanceOf(
+            expected: LevelThreeDep::class,
+            actual: $levelThreeDep
+        );
     }
 
     /**
@@ -62,7 +86,7 @@ final class ContainerTest extends TestCase
      *
      * @return Generator<string, array<int,string>>
      */
-    public function provideHasStuff(): Generator
+    public function provideValidServiceIds(): Generator
     {
         yield EchoStuffInterface::class => [EchoStuffInterface::class];
         yield MathsInterface::class => [MathsInterface::class];
@@ -72,10 +96,10 @@ final class ContainerTest extends TestCase
     }
 
     /**
-     * @dataProvider provideHasStuff
+     * @dataProvider provideValidServiceIds
      * @test
      */
-    public function itCanHasStuff(
+    public function hasReturnsTrueForValidServiceIds(
         string $service
     ): void {
         self::assertTrue($this->container->has($service));
@@ -86,7 +110,7 @@ final class ContainerTest extends TestCase
      *
      * @return Generator<string, array<int,string>>
      */
-    public function provideNotHasStuff(): Generator
+    public function provideInvalidServiceIds(): Generator
     {
         yield EchoFooService::class => [EchoFooService::class];
         yield MultiplicationService::class => [MultiplicationService::class];
@@ -94,10 +118,10 @@ final class ContainerTest extends TestCase
     }
 
     /**
-     * @dataProvider provideNotHasStuff
+     * @dataProvider provideInvalidServiceIds
      * @test
      */
-    public function itCanNotHasStuff(
+    public function hasReturnsFalseForInvalidServiceIds(
         string $service
     ): void {
         self::assertFalse($this->container->has($service));
