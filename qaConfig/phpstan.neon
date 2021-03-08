@@ -1,6 +1,8 @@
 parameters:
     level: max
     inferPrivatePropertyTypeFromConstructor: true
+    #TODO remove this once completed refactoring
+    reportUnmatchedIgnoredErrors: false
     excludePaths:
         - ./../src/Part1/Chapter2/CoContra/InvalidClass.php
     ignoreErrors:

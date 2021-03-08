@@ -5,7 +5,8 @@
   "require": {
     "php": ">=8.0",
     "ext-bcmath": "*",
-    "ext-tidy": "*"
+    "ext-tidy": "*",
+    "ext-curl": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
