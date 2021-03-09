@@ -6,6 +6,11 @@ parameters:
     excludePaths:
         - ./../src/Part1/Chapter2/CoContra/InvalidClass.php
     ignoreErrors:
+        # Chatper 1
+        -
+            message: '#dynamicProperty#'
+            path: ./../src/Part1/Chapter1
+
         # Chapter 2
         -
             message: '#array_values#'

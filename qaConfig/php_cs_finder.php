@@ -15,6 +15,7 @@ declare(strict_types=1);
 //];
 
 const NOT_PATHS = [
+    'Part1/Chapter1/',
     'Part1/Chapter2/ForceInheritance/Person.php',
     'Part1/Chapter2/StaticAccess/ParentClass.php',
     'Part1/Chapter2/Inheritance/',
