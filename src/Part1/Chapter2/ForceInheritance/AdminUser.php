@@ -32,13 +32,13 @@ final class AdminUser extends AbstractUser
             separator: "\n",
             array: \array_map(
                 callback: static function (
-                               AdminPermission $perm
-                           ): string {
-                               $permName = $perm->getPermName();
-                               $allowed  = ($perm->isAllowed() ? 'true' : 'false');
+                    AdminPermission $perm
+                ): string {
+                    $permName = $perm->getPermName();
+                    $allowed  = ($perm->isAllowed() ? 'true' : 'false');
 
-                               return "{$permName}: {$allowed}";
-                           },
+                    return "{$permName}: {$allowed}";
+                },
                 array: $this->permissions
             )
         );
