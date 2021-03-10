@@ -9,10 +9,7 @@ use Book\Part1\Chapter2\StaticAccess\ParentClass;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
-$parent = new ParentClass();
-$child  = new ChildClass();
-
-echo "\n\n\$parent::getStringSelf   =  {$parent::getStringSelf()}";
-echo "\n\n\$parent::getStringStatic =  {$parent::getStringStatic()}";
-echo "\n\n\$child::getStringSelf    =  {$child::getStringSelf()}";
-echo "\n\n\$child::getStringStatic  =  {$child::getStringStatic()}";
+echo "\n\nParentClass::getStringSelf   =  " . ParentClass::getStringSelf();
+echo "\n\nParentClass::getStringStatic =  " . ParentClass::getStringStatic();
+echo "\n\nChildClass::getStringSelf    =  " . ChildClass::getStringSelf();
+echo "\n\nChildClass::getStringStatic  =  " . ChildClass::getStringStatic();
