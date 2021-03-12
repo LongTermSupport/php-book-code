@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1\IteratorFun;
+namespace Book\Part1\Chapter3\IteratorFun;
 
 use FilesystemIterator;
 use RuntimeException;
@@ -50,12 +50,19 @@ final class DirectoryRemover
          * instead of plain path strings
          *
          * The SKIP_DOTS flag means that it skips the ./ and ../ items
-         *
-         * We are overriding the FileSystemIterator and enforcing that current()
-         * will always return the SplFileInfo
-         * and for brevity this is using an anonymous class and a trait
          */
-        return new class(directory: $path, flags: FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS) extends FilesystemIterator {
+        $flags = FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS;
+
+        /*
+         * Creating a new anonymous class that extends the SPL FilesystemIterator
+         * and allows us to include our trait
+         */
+        return new class(directory: $path, flags: $flags) extends FilesystemIterator {
+            /*
+             * We are overriding the FileSystemIterator and enforcing that current()
+             * will always return the SplFileInfo
+             * and for brevity this is using an anonymous class and a trait
+             */
             use CurrentIsFileInfoTrait;
         };
     }

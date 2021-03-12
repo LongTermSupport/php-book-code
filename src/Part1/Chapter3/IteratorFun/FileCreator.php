@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1\IteratorFun;
+namespace Book\Part1\Chapter3\IteratorFun;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -12,6 +12,7 @@ use SplFileInfo;
 final class FileCreator
 {
     private bool $toggle = false;
+
     /** @var bool[] */
     private array $visited;
 
@@ -58,10 +59,12 @@ final class FileCreator
             !\mkdir($path, 0777, true)
             && !\is_dir($path)
         ) {
-            throw new RuntimeException(\sprintf(
-                'Directory "%s" was not created',
-                $path
-            ));
+            throw new RuntimeException(
+                \sprintf(
+                    'Directory "%s" was not created',
+                    $path
+                )
+            );
         }
     }
 
@@ -70,17 +73,23 @@ final class FileCreator
      */
     private function getIterator(Config $config): RecursiveIteratorIterator
     {
+        /*
+         * First we create a RecursiveDirectoryIterator which will allow us
+         * to iterate over a nested structure of files and folders.
+         */
         $directoryIterator = new RecursiveDirectoryIterator(
             directory: $config->getBaseDir(),
             flags: RecursiveDirectoryIterator::SKIP_DOTS
         );
 
         /*
+         * Then we build an instance of RecursiveIteratorIterator which is required
+         * to allow us to iterate over the RecursiveDirectoryIterator
+         *
          * The SELF_FIRST flag means that we list the directory and then the files in there.
          */
-
         return new RecursiveIteratorIterator(
-            $directoryIterator,
+            iterator: $directoryIterator,
             mode: RecursiveIteratorIterator::SELF_FIRST
         );
     }
@@ -108,12 +117,9 @@ final class FileCreator
     private function valid(SplFileInfo $fileInfo, Config $config): bool
     {
         return \str_starts_with(
-            haystack
-                : $fileInfo->getPathname(),
-            needle
-                : $config->getBaseDir()
-        )
-               && $fileInfo->isDir() === true;
+            haystack: $fileInfo->getPathname(),
+            needle: $config->getBaseDir()
+        ) && $fileInfo->isDir() === true;
     }
 
     /**

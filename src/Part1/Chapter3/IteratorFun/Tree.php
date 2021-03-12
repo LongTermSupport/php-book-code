@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1\IteratorFun;
+namespace Book\Part1\Chapter3\IteratorFun;
 
 use RecursiveDirectoryIterator;
 use RecursiveTreeIterator;

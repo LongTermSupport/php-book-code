@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1\Attributes;
+namespace Book\Part1\Chapter3\Attributes;
 
 #[WrittenByAttribute('Jane')]
 final class Bar

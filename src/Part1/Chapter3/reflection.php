@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1;
+namespace Book\Part1\Chapter3;
 
-use Book\Part1\Chapter1\ReflectionFun\Kid;
+use Book\Part1\Chapter3\ReflectionFun\Kid;
 use ReflectionObject;
 
 require __DIR__ . '/../../../vendor/autoload.php';

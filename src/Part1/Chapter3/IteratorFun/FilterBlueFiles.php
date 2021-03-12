@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1\IteratorFun;
+namespace Book\Part1\Chapter3\IteratorFun;
 
 use FilterIterator;
 use RecursiveDirectoryIterator;
@@ -18,17 +18,28 @@ final class FilterBlueFiles
     {
         $filterIterator = $this->getIterator($config);
 
+        /*
+         * The iterator to array function effectively loops
+         * through our iterator and provides the result as an array
+         */
         return \iterator_to_array($filterIterator);
     }
 
-    /** @return FilterIterator */
     private function getIterator(Config $config): FilterIterator
     {
-        $directoryIterator =
-            new RecursiveDirectoryIterator(directory: $config->getBaseDir());
+        $directoryIterator = new RecursiveDirectoryIterator(
+            directory: $config->getBaseDir()
+        );
 
-        // Anonymous class
+        /*
+         * Creating a new anonymous class that is inheriting from
+         * the SPL FilterIterator abstract class
+         */
         return new class(new RecursiveIteratorIterator($directoryIterator)) extends FilterIterator {
+            /**
+             * Implementing the abstract method in FilterIterator
+             * with our custom logic to only accept blue files.
+             */
             public function accept(): bool
             {
                 $current = $this->current();
@@ -42,10 +53,8 @@ final class FilterBlueFiles
             private function isBlue(string $filename): bool
             {
                 return \str_contains(
-                    haystack
-                    : $filename,
-                    needle
-                    : FilterBlueFiles::FILTER_MATCH
+                    haystack: $filename,
+                    needle: FilterBlueFiles::FILTER_MATCH
                 );
             }
         };

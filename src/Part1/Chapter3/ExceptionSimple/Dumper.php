@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1\ExceptionSimple;
+namespace Book\Part1\Chapter3\ExceptionSimple;
 
 use Throwable;
 

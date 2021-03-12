@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Book\Part1\Chapter1;
+namespace Book\Part1\Chapter3;
 
-use Book\Part1\Chapter1\ExceptionSimple\BarException;
-use Book\Part1\Chapter1\ExceptionSimple\Dumper;
-use Book\Part1\Chapter1\ExceptionSimple\FooException;
+use Book\Part1\Chapter3\ExceptionSimple\BarException;
+use Book\Part1\Chapter3\ExceptionSimple\Dumper;
+use Book\Part1\Chapter3\ExceptionSimple\FooException;
 use Exception;
 use Throwable;
 
