@@ -21,3 +21,10 @@ As with single quoted strings, you have to escape any \" characters you want to 
 \nOne nice feature of this kind of string is that you can easily\n embed \n\t special\n\t\t characters
 ";
 echo "\n{$doubleQuoted}\n";
+
+$hereDoc = <<<DELIM
+    A heredoc is exactly like the double quoted string, but comes with the benefit of " and ' being included with no hassle. 
+    You can also embed things like {$thingToEmbed} and {$otherThing->getStuff()}.
+    HEREDOC strings will also let you \n embed\n\t special\n\t\t characters.
+    DELIM;
+echo "\n{$hereDoc}\n";

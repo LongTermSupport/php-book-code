@@ -27,7 +27,7 @@ parameters:
             path: ./../src/Part2/*/*
         -
             message: '#Only booleans are allowed in a ternary operator#'
-            path: ./../src/Part2/*/truthy.php
+            path: ./../src/Part2/*/Truthy/TruthDumper.php
         -
             message: '#Cannot cast#'
             path: ./../src/Part2/*/type_juggling.php
