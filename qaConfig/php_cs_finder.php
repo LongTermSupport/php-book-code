@@ -8,7 +8,7 @@ const NOT_PATHS = [
     'Part1/Chapter2/StaticAccess/ParentClass.php',
     'Part1/Chapter2/Inheritance/',
     'Part1/Chapter2/inheritance.php',
-    'Part2/Chapter4/truthy.php',
+    'Part2/Chapter4/Truthy/TruthDumper.php',
     'Part2/Chapter4/void.php',
     'Part2/Chapter5/object_comparison.php',
     'Part3/Chapter7/early_return.php',
