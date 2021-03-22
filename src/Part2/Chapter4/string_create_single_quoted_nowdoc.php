@@ -18,6 +18,6 @@ echo "\n{$singleQuoted}\n";
 $nowDoc = <<<'DELIM'
     This is a a NOWDOC string. The definition looks more verbose than single quoted, and you have to type a few more characters. 
     What you get in return though is that you can include all ''' you want with no escaping.
-    You can include all the $'%"\n special characters you want and they will just be included in the string as is
+    You can include all the $%"\n' special characters you want and they will just be included in the string as is
     DELIM;
 echo "\n{$nowDoc}\n";

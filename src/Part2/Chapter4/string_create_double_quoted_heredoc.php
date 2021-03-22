@@ -7,7 +7,7 @@ namespace Book\Part2\Chapter4;
 /**
  * Do want to embed things directly in the string.
  */
-$thingToEmbed = ' [embed me pls ]';
+$thingToEmbed = ' [embed me pls] ';
 $otherThing   = new class() {
     public function getStuff(): string
     {
