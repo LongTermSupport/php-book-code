@@ -9,14 +9,10 @@ namespace Book\Part2\Chapter4;
  */
 $singleQuoted =
     'This is a single quoted string. It can contain all kind of characters such as $"\n#, '
-    .
-    ';nothing will happen, the raw characters will just be included in your string.'
-    .
-    ' This makes it a very safe one to use. The main time it gets annoying, '
-    .
-    'is when you want your string to contain \' characters, '
-    .
-    'as then you have to remember to escape them with \\';
+    . ';nothing will happen, the raw characters will just be included in your string.'
+    . ' This makes it a very safe one to use. The main time it gets annoying, '
+    . 'is when you want your string to contain \' characters, '
+    . 'as then you have to remember to escape them with \\';
 echo "\n{$singleQuoted}\n";
 
 $nowDoc = <<<'DELIM'
