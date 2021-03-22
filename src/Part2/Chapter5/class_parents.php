@@ -15,10 +15,10 @@ $childFqn             = $child::class;
 $childClassParents    = \array_values(\class_parents($child));
 $childClassInterfaces = \array_values(\class_implements($child));
 
-echo "\nClass Parents of $childFqn:\n" .
+echo "\nClass Parents of {$childFqn}:\n" .
      \var_export($childClassParents, true);
 
-echo "\nInterfaces of $childFqn:\n" .
+echo "\nInterfaces of {$childFqn}:\n" .
      \var_export($childClassInterfaces, true);
 
 function isInstanceOf(object $object, string $item): string
@@ -29,7 +29,7 @@ function isInstanceOf(object $object, string $item): string
     return \sprintf($format, "{$item}?", $result);
 }
 
-echo "\n\n$childFqn instance of checks:\n";
+echo "\n\n{$childFqn} instance of checks:\n";
 
 foreach ($childClassParents + $childClassInterfaces as $item) {
     echo isInstanceOf($child, $item);

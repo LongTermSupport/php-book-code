@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Part2\Chapter5\ReflectionNewInstance;
 
-class Foo
+final class Foo
 {
     public string $bar = 'default';
 
