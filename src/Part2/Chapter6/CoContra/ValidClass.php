@@ -8,7 +8,9 @@ final class ValidClass extends ParentClass implements ScalarInterface
 {
     /**
      * Contravariant with ParentClass, param type moved up a notch on the
-     * hierarchical chain Covariant with ParentClass, return type moved down
+     * hierarchical chain.
+     *
+     * Covariant with ParentClass, return type moved down
      * a notch on the hierarchical chain.
      */
     public function getSomething(GrandParentInterface $thing): ChildInterface
@@ -18,7 +20,8 @@ final class ValidClass extends ParentClass implements ScalarInterface
     }
 
     /**
-     * Contravariant with Interface, types expanded to accept ints
+     * Contravariant with Interface, types expanded to accept ints.
+     *
      * Covariant with Interface, return type has been tightened and int has
      * been removed as an allowed type.
      */

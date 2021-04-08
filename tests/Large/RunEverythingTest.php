@@ -30,6 +30,7 @@ final class RunEverythingTest extends TestCase
         'string_functions.php' => true,
         'inheritance.php'      => true,
         'interfaces.php'       => true,
+        'fluent.php'           => true,
     ];
     private const EXPECT_FAILURE = [
         'uninitialised.php' => true,
