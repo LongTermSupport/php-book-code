@@ -30,7 +30,7 @@ final class DryMuggle
 
     public function getDisplayPrice(int | float $price): string
     {
-        return '£' . \number_format(num: $price, decimals: self::NUM_DECIMALS);
+        return self::CURRENCY_SYMBOL . \number_format(num: $price, decimals: self::NUM_DECIMALS);
     }
 
     public function isValidPrice(int | float $price): bool

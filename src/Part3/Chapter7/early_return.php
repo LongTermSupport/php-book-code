@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace Book\Part3\Chapter7;
 
-/*************************************************************************
- * Please ignore the fact these contrived functions
- * could be reduced to fewer lines quite easily. Just focus on the
- * decision points and the cylomatic complexity please!
- ************************************************************************/
-
 /**
  * Note the error returns are towards the end of the function
  * - a dead giveaway that this should be returning early
