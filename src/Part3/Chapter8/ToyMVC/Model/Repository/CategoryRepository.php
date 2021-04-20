@@ -10,7 +10,7 @@ use Book\Part3\Chapter8\ToyMVC\Model\Entity\CategoryEntity;
 use Book\Part3\Chapter8\ToyMVC\Model\Entity\Uuid;
 use RuntimeException;
 
-final class CategoryRepository
+final class CategoryRepository implements CategoryRepositoryInterface
 {
     public function loadAll(): CategoryCollection
     {

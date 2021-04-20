@@ -10,7 +10,7 @@ use Book\Part3\Chapter8\ToyMVC\Model\Entity\PostEntity;
 use Book\Part3\Chapter8\ToyMVC\Model\Entity\Uuid;
 use RuntimeException;
 
-final class PostRepository
+final class PostRepository implements PostRepositoryInterface
 {
     public function loadAll(): PostCollection
     {

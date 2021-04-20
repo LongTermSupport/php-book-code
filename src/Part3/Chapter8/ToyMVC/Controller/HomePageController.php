@@ -8,7 +8,7 @@ use Book\Part3\Chapter8\ToyMVC\Controller\Data\RequestData;
 use Book\Part3\Chapter8\ToyMVC\Controller\Data\RequestMethod;
 use Book\Part3\Chapter8\ToyMVC\Controller\Data\Response;
 use Book\Part3\Chapter8\ToyMVC\Meta\Route;
-use Book\Part3\Chapter8\ToyMVC\Model\Repository\CategoryRepository;
+use Book\Part3\Chapter8\ToyMVC\Model\Repository\CategoryRepositoryInterface;
 use Book\Part3\Chapter8\ToyMVC\View\Data\HomePageData;
 use Book\Part3\Chapter8\ToyMVC\View\TemplateRenderer;
 
@@ -22,7 +22,7 @@ final class HomePageController implements ControllerInterface
     public const TEMPLATE_NAME = 'HomePageTemplate.php';
 
     public function __construct(
-        private CategoryRepository $categoryRepository,
+        private CategoryRepositoryInterface $categoryRepository,
         private TemplateRenderer $templateRenderer
     ) {
     }

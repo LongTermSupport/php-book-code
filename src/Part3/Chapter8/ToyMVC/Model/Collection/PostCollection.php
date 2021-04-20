@@ -8,10 +8,6 @@ use Book\Part3\Chapter8\ToyMVC\Model\Entity\PostEntity;
 use Countable;
 use Iterator;
 use OutOfBoundsException;
-use function count;
-use function current;
-use function key;
-use function next;
 
 /**
  * @implements Iterator<string, PostEntity>
@@ -24,6 +20,7 @@ final class PostCollection implements Iterator, Countable
     public function __construct(PostEntity ...$postEntities)
     {
         $this->postEntities = $postEntities;
+        $this->rewind();
     }
 
     public function next(): bool | PostEntity
@@ -47,8 +44,7 @@ final class PostCollection implements Iterator, Countable
 
         return $current instanceof PostEntity
             ? $current
-            :
-            throw new OutOfBoundsException('Failed getting current PostEntity');
+            : throw new OutOfBoundsException('Failed getting current PostEntity');
     }
 
     public function valid(): bool

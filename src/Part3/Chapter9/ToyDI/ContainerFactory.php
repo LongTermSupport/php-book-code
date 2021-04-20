@@ -21,15 +21,25 @@ final class ContainerFactory
     public const SHORTHAND_NAME_FOR_MATHS = 'maths';
 
     /**
+     * This is an array with the configured service class as the key and an array of one or more service IDs as the
+     * value.
+     *
+     * These IDs can just be the class FQN, or they can be any other arbitrary string.
+     *
+     * This configurability is fundamental to the inversion of control principle.
+     *
+     * This allows us to handle mapping interfaces to concretions and also have services available with arbitrary
+     * string IDs such as the shorthand name for maths
+     *
      * @var array<class-string,array<int,string>>
      */
     private const SERVICE_CLASSES_TO_IDS = [
-        AdditionService::class => [
+        AdditionService::class   => [
             MathsInterface::class,
             AdditionService::class,
             self::SHORTHAND_NAME_FOR_MATHS,
         ],
-        EchoBarService::class => [
+        EchoBarService::class    => [
             EchoStuffInterface::class,
             EchoBarService::class,
         ],

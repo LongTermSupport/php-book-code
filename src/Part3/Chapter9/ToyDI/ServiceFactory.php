@@ -48,18 +48,14 @@ final class ServiceFactory
     private function assertServiceClassName(string $className): void
     {
         if (
-            \array_key_exists(
-                key
-                : $className,
-                array
-                : $this->classNamesToInstances
-            )
+        \array_key_exists(
+            key: $className,
+            array: $this->classNamesToInstances
+        )
         ) {
             return;
         }
-        throw new NotFoundException('Class ' .
-                                    $className .
-                                    ' is not defined as a service');
+        throw new NotFoundException('Class ' . $className . ' is not defined as a service');
     }
 
     /**

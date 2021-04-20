@@ -6,6 +6,10 @@ namespace Book\Part3\Chapter8\ToyMVC\Controller\Data;
 
 use InvalidArgumentException;
 
+/**
+ * Note: We're deliberately only handling the most basic HTTP verbs for the purposes of the Toy.
+ * A real framework would handle other verbs such as PUT, DELETE and maybe others.
+ */
 final class RequestMethod
 {
     public const METHOD_GET  = 'GET';

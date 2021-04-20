@@ -13,6 +13,7 @@ use Book\Part3\Chapter8\ToyMVC\Model\Repository\CategoryRepository;
 use Book\Part3\Chapter8\ToyMVC\View\Data\CategoryPageData;
 use Book\Part3\Chapter8\ToyMVC\View\TemplateRenderer;
 
+/** Note use of consts instead of magic strings for attribute params */
 #[Route(CategoryPageController::ROUTE_REGEX, RequestMethod::METHOD_GET)]
 final class CategoryPageController implements ControllerInterface
 {
@@ -32,7 +33,7 @@ final class CategoryPageController implements ControllerInterface
 
     public function getResponse(RequestData $requestData): Response
     {
-        $uuid =
+        $uuid           =
             Uuid::createFromUri($requestData->getUri(), self::ROUTE_REGEX);
         $categoryEntity = $this->categoryRepository->load($uuid);
         $templateData   = new CategoryPageData($categoryEntity);

@@ -8,10 +8,6 @@ use Book\Part3\Chapter8\ToyMVC\Model\Entity\CategoryEntity;
 use Countable;
 use Iterator;
 use OutOfBoundsException;
-use function count;
-use function current;
-use function key;
-use function next;
 
 /**
  * @implements Iterator<string, CategoryEntity>
@@ -24,6 +20,7 @@ final class CategoryCollection implements Iterator, Countable
     public function __construct(CategoryEntity ...$categoryEntities)
     {
         $this->categoryEntities = $categoryEntities;
+        $this->rewind();
     }
 
     public function next(): bool | CategoryEntity
