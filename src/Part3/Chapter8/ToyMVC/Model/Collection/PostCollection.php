@@ -14,7 +14,7 @@ use OutOfBoundsException;
  */
 final class PostCollection implements Iterator, Countable
 {
-    /** @var PostEntity[] * */
+    /** @var PostEntity[] */
     private array $postEntities;
 
     public function __construct(PostEntity ...$postEntities)

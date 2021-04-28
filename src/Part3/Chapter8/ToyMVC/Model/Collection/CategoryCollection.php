@@ -14,7 +14,7 @@ use OutOfBoundsException;
  */
 final class CategoryCollection implements Iterator, Countable
 {
-    /** @var CategoryEntity[] * */
+    /** @var CategoryEntity[] */
     private array $categoryEntities;
 
     public function __construct(CategoryEntity ...$categoryEntities)
