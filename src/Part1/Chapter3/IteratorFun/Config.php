@@ -22,9 +22,7 @@ final class Config
         }
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getSubDirs(): array
     {
         return $this->subDirs;
