@@ -14,9 +14,7 @@ final class UrlCollection
         $this->urls = $urls;
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getUrls(): array
     {
         return $this->urls;
