@@ -18,7 +18,7 @@ final class ModernClass
     public function __construct(
         private object $anObject,
         // notice union type, PHP 8 feature
-    private int | float $aNumber,
+        private int | float $aNumber,
         private string $aString,
         private bool $aBool = true,
         // choosing the type safety of splat over the convenience of constructor promotion and named parameters

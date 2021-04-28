@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Book\Part2\Chapter5;
 
 //For non object variables, we have to use the & sign to declare references
-
 $a = 1;
 echo "\n\$a is {$a}";
+
 // $b is a reference to $a
 $b =&$a;
+
 // by updating $b, we actually update $a
 $b = 2;
 echo "\nAnd now \$a is {$a}";

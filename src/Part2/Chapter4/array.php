@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Book\Part2\Chapter4;
 
 // if we don't specify keys, they are ints starting from 0
-
 $intKeysStringValues = ['a', 'b', 'c'];
 echo "\n\$intKeysStringValues =" . \var_export($intKeysStringValues, true);
 

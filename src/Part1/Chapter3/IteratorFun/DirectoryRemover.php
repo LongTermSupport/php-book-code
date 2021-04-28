@@ -45,9 +45,9 @@ final class DirectoryRemover
 
     private function getIterator(string $path): FilesystemIterator
     {
-        /*
+        /**
          * The CURRENT_AS_FILEINFO informs the FileSystemIterator to give us SplFileInfo objects
-         * instead of plain path strings
+         * instead of plain path strings.
          *
          * The SKIP_DOTS flag means that it skips the ./ and ../ items
          */

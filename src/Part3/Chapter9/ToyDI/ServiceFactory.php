@@ -12,9 +12,12 @@ use RuntimeException;
 
 final class ServiceFactory
 {
-    // This is an array of class names to actual instances of that class.
-    // This allows us to ensure we keep only one instance of a given class
-    /** @var array <class-string, object|null> */
+
+    /**
+     * This is an array of class names to actual instances of that class.
+     * This allows us to ensure we keep only one instance of a given class
+     * @var array <class-string, object|null>
+     */
     private array $classNamesToInstances;
 
     public function __construct(private ServiceLocator $serviceLocator)
@@ -30,7 +33,7 @@ final class ServiceFactory
         // if we already have an instance stored, we just return that
         return $this->classNamesToInstances[$className]
             // otherwise we create an instance and store the result
-            // note, the ==? null coalesce assignment operator, assigns the value of
+            // note, the ??= null coalesce assignment operator, assigns the value of
             // the right hand side to the left when the left is null
             ??= new $className(...$this->getDependencyInstances($className));
     }
@@ -60,9 +63,7 @@ final class ServiceFactory
 
     /**
      * @param class-string $className
-     *
      * @throws ReflectionException
-     *
      * @return array<int,object>
      */
     private function getDependencyInstances(string $className): array

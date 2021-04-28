@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Book\Part2\Chapter4;
 
 // assigning null as a value
-
 $foo = null;
 
 // short function syntax to return a null

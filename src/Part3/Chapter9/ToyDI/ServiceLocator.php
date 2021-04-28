@@ -8,8 +8,11 @@ use Psr\Container\ContainerInterface;
 
 final class ServiceLocator implements ContainerInterface
 {
-    // This is an array of service IDs to the class name configured for the service
-    /** @var array<string, class-string> */
+    /**
+     * This is an array of service IDs to the class name configured for the service.
+     *
+     * @var array<string, class-string>
+     */
     private array $idsToClassNames;
 
     private ServiceFactory $serviceFactory;
@@ -23,8 +26,14 @@ final class ServiceLocator implements ContainerInterface
         $this->serviceFactory = new ServiceFactory($this);
     }
 
-    // this is the second of the two methods defined in the PSR ContainerInterface.
-
+    /**
+     * This is the first of the two methods defined in the PSR ContainerInterface.
+     * The interface does not define a param type and so we are not able to either
+     * due to the contravariance (remember that) rules that say parameter types are only able to become looser
+     * thanks to covariance rules, we are able to add return type hints though.
+     *
+     * @throws NotFoundException
+     */
     public function get($id): object
     {
         // first determine which class to use for the service ID
@@ -34,6 +43,9 @@ final class ServiceLocator implements ContainerInterface
         return $this->serviceFactory->getInstance($className);
     }
 
+    /**
+     * This is the second of the two methods defined in the PSR ContainerInterface.
+     */
     public function has($id): bool
     {
         return isset($this->idsToClassNames[$id]);
@@ -45,11 +57,6 @@ final class ServiceLocator implements ContainerInterface
         return $this->idsToClassNames;
     }
 
-    // this is the first of the two methods defined in the PSR ContainerInterface.
-    // The interface does not define a param type and so we are not able to either
-    // due to the contravariance (remember that) rules that say parameter types are only able to become looser
-    // thanks to covariance rules, we are able to add return type hints though
-
     private function storeDefinition(
         ServiceDefinitionInterface $serviceDefinition
     ): void {
@@ -60,12 +67,15 @@ final class ServiceLocator implements ContainerInterface
         }
     }
 
-    /** @return class-string */
+    /**
+     * @throws NotFoundException
+     * @return class-string
+     */
     private function getClassFullyQualifiedNameForId(string $id): string
     {
         return $this->idsToClassNames[$id]
-               ??
-               throw new NotFoundException('Failed finding service class for ' .
-                                           $id);
+               ?? throw new NotFoundException(
+                   'Failed finding service class for ' . $id
+               );
     }
 }

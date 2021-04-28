@@ -6,8 +6,10 @@ namespace Book\Part1\Chapter1;
 
 interface GetsSomethingInterface
 {
-    // This interface defines one method.
-    // It must be called "getSomething" and it must return a string
+    /**
+     * This interface defines one method.
+     * It must be called "getSomething" and it must return a string
+     */
     public function getSomething(): string;
 }
 

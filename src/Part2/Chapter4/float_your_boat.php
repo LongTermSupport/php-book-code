@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Book\Part2\Chapter4;
 
 // seems OK...
-
 echo "\n(0.2+0.2) = 0.4? " . \var_export((0.2 + 0.2) === 0.4, true) . "\n";
 
 // wait, what?
