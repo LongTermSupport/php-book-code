@@ -5,6 +5,7 @@ parameters:
     reportUnmatchedIgnoredErrors: false
     excludePaths:
         - ./../src/Part2/Chapter6/CoContra/InvalidClass.php
+        - ./../src/Part4/Chapter10/MyFirstProject/vendor/*
     ignoreErrors:
         # Part 1
         -
@@ -63,3 +64,7 @@ parameters:
         -
             message: '#Parameter \#2 \$className of method .+?getSimpleDefinition\(\) expects class-string, string#'
             path: ./../src/Part3/*/ToyDI/ContainerFactory.php
+        # Part 4
+        -
+            message: '#spl_autoload_register#'
+            path: ./../src/Part4/Chapter10/bespokeAutoloader.php

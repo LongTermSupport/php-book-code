@@ -26,11 +26,14 @@ final class RunEverythingTest extends TestCase
     private const SUCCESS_CODE   = 0;
     private const FAILURE_CODE   = 255;
     private const EXPECT_EMPTY   = [
-        'named_args.php'       => true,
-        'string_functions.php' => true,
-        'inheritance.php'      => true,
-        'interfaces.php'       => true,
-        'fluent.php'           => true,
+        'named_args.php'        => true,
+        'string_functions.php'  => true,
+        'inheritance.php'       => true,
+        'interfaces.php'        => true,
+        'fluent.php'            => true,
+        'autoloadedBliss.php'   => true,
+        'bespokeAutoloader.php' => true,
+        'oldFashioned.php'      => true,
     ];
     private const EXPECT_FAILURE = [
         'uninitialised.php' => true,
@@ -44,15 +47,15 @@ final class RunEverythingTest extends TestCase
 
         [$exitCode, $output] = $this->runCode($codeRealPath);
 
-        isset(self::EXPECT_EMPTY[$basename])
-            ? self::assertSame('', $output)
-            : self::assertNotEmpty($output, $output);
-
         $errorMessage = "Got Output:\n\n{$output}";
 
         isset(self::EXPECT_FAILURE[$basename])
             ? self::assertSame(self::FAILURE_CODE, $exitCode, $errorMessage)
             : self::assertSame(self::SUCCESS_CODE, $exitCode, $errorMessage);
+
+        isset(self::EXPECT_EMPTY[$basename])
+            ? self::assertSame('', $output)
+            : self::assertNotEmpty($output, $output);
     }
 
     /**
@@ -94,6 +97,9 @@ final class RunEverythingTest extends TestCase
                     /** @var SplFileInfo $current */
                     $current = $this->current();
                     $path    = (string)$current->getRealPath();
+                    if (\str_contains($path, '/vendor/')) {
+                        return false;
+                    }
 
                     return \preg_match(self::ACCEPT_REGEXP, $path) === 1;
                 }
