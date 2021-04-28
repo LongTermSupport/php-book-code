@@ -6,9 +6,7 @@ namespace Book\Part1\Chapter2\Composition;
 
 final class UrlCollection
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private array $urls;
 
     public function __construct(string ...$urls)
