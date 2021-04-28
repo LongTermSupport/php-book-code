@@ -69,6 +69,7 @@ final class ServiceLocator implements ContainerInterface
 
     /**
      * @throws NotFoundException
+     *
      * @return class-string
      */
     private function getClassFullyQualifiedNameForId(string $id): string
