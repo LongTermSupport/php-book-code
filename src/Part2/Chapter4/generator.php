@@ -6,9 +6,7 @@ namespace Book\Part2\Chapter4;
 
 use Generator;
 
-/**
- * @return Generator<int>
- */
+/** @return Generator<int> */
 function gener8(int $num): Generator
 {
     // be careful doing this kind of thing :)

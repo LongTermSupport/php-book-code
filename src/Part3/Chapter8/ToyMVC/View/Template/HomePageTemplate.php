@@ -9,7 +9,7 @@ use Book\Part3\Chapter8\ToyMVC\View\Esc;
 
 // Note this one line of DocBlock allows all of the code in this template to be statically analysed
 // and allows our IDE to autocomplete all method calls etc for us
-/* @var $templateData HomePageData */
+/** @var $templateData HomePageData */
 
 ?>
 <!DOCTYPE html>

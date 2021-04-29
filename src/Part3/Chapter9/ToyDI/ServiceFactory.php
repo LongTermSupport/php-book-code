@@ -86,9 +86,7 @@ final class ServiceFactory
         return $return;
     }
 
-    /**
-     * @return class-string
-     */
+    /** @return class-string */
     private function getServiceClassString(
         ReflectionParameter $reflectionParameter
     ): string {
