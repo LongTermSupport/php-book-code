@@ -1,5 +1,5 @@
 {
-  "name": "book_ops/php-book-code",
+  "name": "lts/php-book-code",
   "description": "Code for PHP Book",
   "type": "project",
   "require": {
