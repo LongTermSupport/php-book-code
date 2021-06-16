@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cli;
+namespace YourName\HelloWorld\Cli;
 
 use YourName\HelloWorld\Language;
 
@@ -17,6 +17,7 @@ class Args
         if (PHP_SAPI !== 'cli') {
             throw new \RuntimeException('This class only works in command line PHP');
         }
+        $this->parse();
     }
 
     private function parse(): void
@@ -27,7 +28,8 @@ class Args
             }
             [$argKey, $argVal] = explode(self::EQUALS, $arg);
             match ($argKey) {
-                self::ARG_LANG => fn() => $this->languageCode = $argVal
+                self::ARG_LANG => $this->languageCode = $argVal,
+                default => throw new \InvalidArgumentException('Invalid argument ' . $argKey)
             };
         }
     }

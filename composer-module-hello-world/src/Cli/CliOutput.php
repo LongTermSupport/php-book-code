@@ -18,6 +18,17 @@ class CliOutput implements OutputInterface
 
     public function sendOutput(MessageProviderInterface $messageProvider): void
     {
-        fwrite(STDOUT, "\n" . $messageProvider->getMessage());
+        fwrite(STDOUT, "\n" . $this->getMessage($messageProvider));
+    }
+
+    private function getMessage(MessageProviderInterface $messageProvider): string
+    {
+        $message       = $messageProvider->getMessage();
+        $messageLength = strlen($message);
+        $topLine       = ' /￣' . str_repeat('￣', $messageLength + 2) . '\\';
+        $bottomLine    = ' \\＿' . str_repeat('＿', $messageLength + 2) . '/';
+        $messageLine   = '<  ' . $message . '  ';
+
+        return "\n\n$topLine\n$messageLine\n$bottomLine\n\n";
     }
 }

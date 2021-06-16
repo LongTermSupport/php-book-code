@@ -6,11 +6,8 @@ namespace YourName\HelloWorld;
 
 final class MessageProvider implements MessageProviderInterface
 {
-    private Language $language;
-
-    public function setLanguage(Language $language): void
+    public function __construct(private Language $language)
     {
-        $this->language = $language;
     }
 
     public function getMessage(): string

@@ -17,14 +17,19 @@ class Language
         self::LANG_IRISH,
     ];
 
-    public function __construct(private string $language)
+    public function __construct(private string $languageCode)
     {
-        in_array(needle: $this->language, haystack: self::LANGUAGES, strict: true)
-        ?? throw new \InvalidArgumentException('Invalid language ' . $this->language);
+        $this->validateLanguageCode();
+    }
+
+    private function validateLanguageCode(): void
+    {
+        in_array(needle: $this->languageCode, haystack: self::LANGUAGES, strict: true)
+            ?: throw new \InvalidArgumentException('Invalid language code ' . $this->languageCode);
     }
 
     public function getLanguageCode(): string
     {
-        return $this->language;
+        return $this->languageCode;
     }
 }
