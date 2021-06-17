@@ -21,7 +21,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "YourName\\HelloWorld\\\\Test\\": "tests/"
+      "YourName\\HelloWorld\\Test\\": "tests/"
     }
   },
   "require-dev": {
