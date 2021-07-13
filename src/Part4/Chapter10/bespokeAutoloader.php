@@ -8,7 +8,7 @@ use Book\Part4\Chapter10\Dependencies\ClassOne;
 use Book\Part4\Chapter10\Dependencies\ClassTwo;
 use RuntimeException;
 
-/**
+/*
  * We call spl_autoload_register and pass in our bespoke closure which handles autoloading.
  *
  * This autoloader has been crafted to load classes from the `Dependencies` sub folder of the Chapter10 directory.
