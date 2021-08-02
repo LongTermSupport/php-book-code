@@ -51,10 +51,10 @@ final class ServiceFactory
     private function assertServiceClassName(string $className): void
     {
         if (
-        \array_key_exists(
-            key: $className,
-            array: $this->classNamesToInstances
-        )
+            \array_key_exists(
+                key:   $className,
+                array: $this->classNamesToInstances
+            )
         ) {
             return;
         }
@@ -64,9 +64,9 @@ final class ServiceFactory
     /**
      * @param class-string $className
      *
+     * @return array<int,object>
      * @throws ReflectionException
      *
-     * @return array<int,object>
      */
     private function getDependencyInstances(string $className): array
     {
@@ -79,8 +79,7 @@ final class ServiceFactory
         // now we loop over all the parameters of the constructor and build an array of dependencies in the correct order
         // note that we have no safety here at all - a real implementation would need to do a lot more sanity checking
         foreach ($constructor->getParameters() as $reflectionParameter) {
-            $return[] =
-                $this->getInstance($this->getServiceClassString($reflectionParameter));
+            $return[] = $this->getInstance($this->getServiceClassString($reflectionParameter));
         }
 
         return $return;

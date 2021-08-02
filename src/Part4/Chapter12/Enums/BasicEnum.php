@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Book\Part4\Chapter12\Enums;
 
-enum BasicEnum
+enum BasicEnum implements ProvidesRandomCaseInterface
 {
     /** Enums define one or more cases that they can possibly exist as */
     case Foo;

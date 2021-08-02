@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Book\Part4\Chapter12\Enums;
 
-enum BackedEnum: string
+/**
+ * Notice the backed enum has to declare its backing type
+ */
+enum BackedEnum: string implements ProvidesRandomCaseInterface
 {
+    /** Backed enum cases define the name and the value */
     case Baz = 'Baz';
     case Taz = 'Taz';
 
