@@ -16,7 +16,7 @@ class ReadonlyCreateWithClone
     public function with(int $foo):self{
         // to avoid having to recreate the expensive thing and to generally make this easy, a common pattern is to use clone
         $clone = clone $this;
-        $clone->foo=$foo;
+        $clone->foo = $foo;
 
         return $clone;
     }
