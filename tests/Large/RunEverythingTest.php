@@ -38,6 +38,9 @@ final class RunEverythingTest extends TestCase
     private const EXPECT_FAILURE = [
         'uninitialised.php' => true,
     ];
+    public const  SKIP_PATHS     = [
+        'src/Part4/Chapter12',
+    ];
 
     /** @dataProvider provideFilesToRun */
     public function testItRuns(SplFileInfo $file): void
@@ -74,8 +77,8 @@ final class RunEverythingTest extends TestCase
     private function runCode(string $codeRealPath): array
     {
         \exec(
-            command: self::DISABLE_XDEBUG . ' && php -f ' . $codeRealPath . self::REDIRECT_ERR,
-            output: $output,
+            command:     self::DISABLE_XDEBUG . ' && php -f ' . $codeRealPath . self::REDIRECT_ERR,
+            output:      $output,
             result_code: $exitCode
         );
         $output = \trim(\implode("\n", $output));
@@ -88,22 +91,28 @@ final class RunEverythingTest extends TestCase
      */
     private function filesToRunIterator(): Generator
     {
-        $iterator =
-            new class(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__ . '/../../src/'))) extends FilterIterator {
-                private const ACCEPT_REGEXP = '%src/(?<part>[^/]+)/(?<chapter>[^/]+)/(?<file>[^/]+)\.php%';
+        $iterator = new class(
+            new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__ . '/../../src/'))
+        ) extends FilterIterator {
+            private const ACCEPT_REGEXP = '%src/(?<part>[^/]+)/(?<chapter>[^/]+)/(?<file>[^/]+)\.php%';
 
-                public function accept(): bool
-                {
-                    /** @var SplFileInfo $current */
-                    $current = $this->current();
-                    $path    = (string)$current->getRealPath();
-                    if (\str_contains($path, '/vendor/')) {
+            public function accept(): bool
+            {
+                /** @var SplFileInfo $current */
+                $current = $this->current();
+                $path    = (string)$current->getRealPath();
+                if (\str_contains($path, '/vendor/')) {
+                    return false;
+                }
+                foreach (RunEverythingTest::SKIP_PATHS as $skip) {
+                    if (\str_contains($path, $skip)) {
                         return false;
                     }
-
-                    return \preg_match(self::ACCEPT_REGEXP, $path) === 1;
                 }
-            };
+
+                return \preg_match(self::ACCEPT_REGEXP, $path) === 1;
+            }
+        };
         foreach ($iterator as $file) {
             /* @var SplFileInfo $file */
             yield $file->getBasename() => [$file];
