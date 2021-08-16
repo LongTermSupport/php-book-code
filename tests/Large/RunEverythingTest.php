@@ -21,6 +21,9 @@ use SplFileInfo;
  */
 final class RunEverythingTest extends TestCase
 {
+    public const SKIP_PATHS     = [
+        'src/Part4/Chapter12',
+    ];
     private const DISABLE_XDEBUG = ' unset XDEBUG_SESSION ';
     private const REDIRECT_ERR   = ' 2>&1 ';
     private const SUCCESS_CODE   = 0;
@@ -37,9 +40,6 @@ final class RunEverythingTest extends TestCase
     ];
     private const EXPECT_FAILURE = [
         'uninitialised.php' => true,
-    ];
-    public const  SKIP_PATHS     = [
-        'src/Part4/Chapter12',
     ];
 
     /** @dataProvider provideFilesToRun */
@@ -77,8 +77,8 @@ final class RunEverythingTest extends TestCase
     private function runCode(string $codeRealPath): array
     {
         \exec(
-            command:     self::DISABLE_XDEBUG . ' && php -f ' . $codeRealPath . self::REDIRECT_ERR,
-            output:      $output,
+            command: self::DISABLE_XDEBUG . ' && php -f ' . $codeRealPath . self::REDIRECT_ERR,
+            output: $output,
             result_code: $exitCode
         );
         $output = \trim(\implode("\n", $output));
@@ -91,9 +91,7 @@ final class RunEverythingTest extends TestCase
      */
     private function filesToRunIterator(): Generator
     {
-        $iterator = new class(
-            new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__ . '/../../src/'))
-        ) extends FilterIterator {
+        $iterator                       = new class(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__ . '/../../src/'))) extends FilterIterator {
             private const ACCEPT_REGEXP = '%src/(?<part>[^/]+)/(?<chapter>[^/]+)/(?<file>[^/]+)\.php%';
 
             public function accept(): bool
