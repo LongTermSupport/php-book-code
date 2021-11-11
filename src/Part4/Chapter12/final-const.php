@@ -14,7 +14,7 @@ require __DIR__ . '/autoload.php';
  * Constants are accessible down the inheritance chain like any other class property. The visibility is controlled with
  * standard private/protected/public controls. We can make it final at any level in the chain
  */
-echo sprintf('
+printf('
 interfaceFoo = %s
 parentFoo    = %s
 childFoo     = %s
@@ -26,7 +26,7 @@ childFoo     = %s
 /**
  * Constants can be overridden at every step of the inheritance chain, unless marked as final
  */
-echo sprintf('
+printf('
 interfaceThing = %s
 parentThing    = %s
 childThing     = %s
@@ -39,7 +39,7 @@ childThing     = %s
 /**
  * We can see the difference between the self and static versions of these with this code:
  */
-echo sprintf('
+printf('
 ChildClass::getSelfFoo = %s
 ChildClass::getStaticFoo = %s
 
