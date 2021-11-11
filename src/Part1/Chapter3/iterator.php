@@ -28,18 +28,18 @@ if (!\is_dir(filename: TMP_DIR)
 
 $config = new Config(TMP_DIR . '/iterator-fun', 'foo/bar/baz', 'doo/dar/daz');
 
-/**
+/*
  * First we use the DirectoryRemover to clean up any previous run
  */
 (new DirectoryRemover())->removeDir($config->getBaseDir());
 
-/**
+/*
  * Next we recreate our directory structure
  * And we iterate through the nested structure and create a temp file in each level
  */
 (new FileCreator())->createNestedFiles($config);
 
-/**
+/*
  * Tree after first recursive pass through and creating temp files:
  */
 echo "\nCreated File Tree:\n";
